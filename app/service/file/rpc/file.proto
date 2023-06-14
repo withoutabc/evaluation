@@ -44,6 +44,7 @@ message DownloadReq{
 message DownloadResp{
   int32 status_code = 1;
   string status_msg = 2;
+
 }
 service file {
   rpc Upload(UploadReq)returns(UploadResp);

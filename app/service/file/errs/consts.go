@@ -17,11 +17,13 @@ const (
 	FileRepeated       //文件重复上传
 	FileNameWrong      //文件等级错误
 
+	FileIsExist  //上传时文件已经存在
 	FileNotExist //下载时文件不存在
+	ResultNotExist
 )
 
 var (
-	NoErrs     = errors.New("没有错")
+	NoErrs     = errors.New("没有问题")
 	UnknownErr = errors.New("未知错误")
 
 	InternalServerErr = errors.New("服务器内部错误")
@@ -36,7 +38,9 @@ var (
 	FileRepeatedErr       = errors.New("文件重复上传")
 	FileNameWrongErr      = errors.New("文件属性错误")
 
-	FileNotExistErr = errors.New("下载时文件不存在")
+	FileIsExistErr    = errors.New("上传时文件已存在")
+	FileNotExistErr   = errors.New("下载时文件不存在")
+	ResultNotExistErr = errors.New("结果文件不存在")
 )
 
 var ErrorsMap = map[int32]error{
@@ -53,5 +57,8 @@ var ErrorsMap = map[int32]error{
 	FileSystemInternal: FileSystemInternalErr,
 	FileRepeated:       FileRepeatedErr,
 	FileNameWrong:      FileNameWrongErr,
-	FileNotExist:       FileNotExistErr,
+
+	FileIsExist:    FileIsExistErr,
+	FileNotExist:   FileNotExistErr,
+	ResultNotExist: ResultNotExistErr,
 }

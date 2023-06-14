@@ -33,11 +33,11 @@ func NewUploadLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UploadLogi
 	}
 }
 
-func (l *UploadLogic) Upload(req *types.FileReq, r *http.Request) (resp *types.FileResp, err error) {
+func (l *UploadLogic) Upload(req *types.UploadReq, r *http.Request) (resp *types.UploadResp, err error) {
 	err = r.ParseMultipartForm(maxFileSize)
 	if err != nil {
 		log.Printf("max file siza err:%v\n", err)
-		return &types.FileResp{
+		return &types.UploadResp{
 			Status: errs.FileTooBig,
 			Msg:    errs.ErrorsMap[errs.FileTooBig].Error(),
 		}, nil
@@ -46,7 +46,7 @@ func (l *UploadLogic) Upload(req *types.FileReq, r *http.Request) (resp *types.F
 	file, handler, err := r.FormFile("file")
 	if err != nil {
 		fmt.Println(err)
-		return &types.FileResp{
+		return &types.UploadResp{
 			Status: errs.FileGetWrong,
 			Msg:    errs.ErrorsMap[errs.FileGetWrong].Error(),
 		}, nil
@@ -54,7 +54,7 @@ func (l *UploadLogic) Upload(req *types.FileReq, r *http.Request) (resp *types.F
 	defer file.Close() //关闭文件
 	//判断是否为46级,1-3套，年份4位数<2024，月份1-12
 	if !((req.Level == 4 || req.Level == 6) && (req.Month <= 12 && req.Month >= 1) && (req.Year < 2024 && len(strconv.Itoa(int(req.Year))) == 4)) {
-		return &types.FileResp{
+		return &types.UploadResp{
 			Status: errs.FileNameWrong,
 			Msg:    errs.ErrorsMap[errs.FileNameWrong].Error(),
 		}, nil
@@ -67,7 +67,7 @@ func (l *UploadLogic) Upload(req *types.FileReq, r *http.Request) (resp *types.F
 	err = l.svcCtx.HdfsCli.MkdirAll("/evaluation/"+str, 0755)
 	if err != nil {
 		log.Printf("mkdirall err: %v", err)
-		return &types.FileResp{
+		return &types.UploadResp{
 			Status: errs.FileSystemInternal,
 			Msg:    errs.ErrorsMap[errs.FileSystemInternal].Error(),
 		}, nil
@@ -77,7 +77,7 @@ func (l *UploadLogic) Upload(req *types.FileReq, r *http.Request) (resp *types.F
 	hdfsFile, err := l.svcCtx.HdfsCli.Create(hdfsPath)
 	if err != nil {
 		log.Printf("create err: %v", err)
-		return &types.FileResp{
+		return &types.UploadResp{
 			Status: errs.FileSystemInternal,
 			Msg:    errs.ErrorsMap[errs.FileSystemInternal].Error(),
 		}, nil
@@ -87,7 +87,7 @@ func (l *UploadLogic) Upload(req *types.FileReq, r *http.Request) (resp *types.F
 	_, err = io.Copy(hdfsFile, file)
 	if err != nil {
 		log.Printf("Failed to copy file to HDFS: %v", err)
-		return &types.FileResp{
+		return &types.UploadResp{
 			Status: errs.FileSystemInternal,
 			Msg:    errs.ErrorsMap[errs.FileSystemInternal].Error(),
 		}, nil
@@ -101,22 +101,8 @@ func (l *UploadLogic) Upload(req *types.FileReq, r *http.Request) (resp *types.F
 		Month: req.Month,
 		Set:   req.Set,
 	})
-	switch response.StatusCode {
-	case errs.No:
-		return &types.FileResp{
-			Status: errs.No,
-			Msg:    errs.ErrorsMap[errs.No].Error()}, nil
-	case errs.InternalServer:
-		return &types.FileResp{
-			Status: errs.InternalServer,
-			Msg:    errs.ErrorsMap[errs.InternalServer].Error()}, nil
-	case errs.FileNotExist:
-		return &types.FileResp{
-			Status: errs.FileNotExist,
-			Msg:    errs.ErrorsMap[errs.FileNotExist].Error()}, nil
-	}
-	return &types.FileResp{
-		Status: errs.Unknown,
-		Msg:    errs.ErrorsMap[errs.Unknown].Error(),
+	return &types.UploadResp{
+		Status: response.StatusCode,
+		Msg:    response.StatusMsg,
 	}, nil
 }

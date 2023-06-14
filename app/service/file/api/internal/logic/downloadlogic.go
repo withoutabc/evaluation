@@ -2,6 +2,10 @@ package logic
 
 import (
 	"context"
+	"io/ioutil"
+	"rpc/app/service/file/errs"
+	"rpc/app/service/file/rpc/pb"
+	"rpc/utils/joinstring"
 
 	"rpc/app/service/file/api/internal/svc"
 	"rpc/app/service/file/api/internal/types"
@@ -23,8 +27,33 @@ func NewDownloadLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Download
 	}
 }
 
-func (l *DownloadLogic) Download(req *types.FileReq) (resp *types.FileResp, err error) {
-	// todo: add your logic here and delete this line
-
-	return
+func (l *DownloadLogic) Download(req *types.DownloadReq) (resp *types.DownloadResp, body []byte, filename string, err error) {
+	//判读是否存在要下载的内容
+	response, err := l.svcCtx.FileRpc.Download(l.ctx, &pb.DownloadReq{
+		Type: req.Type,
+		Id:   req.Id,
+	})
+	//判断response
+	if response.StatusCode != errs.No {
+		return &types.DownloadResp{
+			Status: response.StatusCode,
+			Msg:    response.StatusMsg,
+		}, nil, "", nil
+	}
+	//没有问题的话就去下载文件
+	str := joinstring.Join(req.Year, req.Month, req.Set, req.Level)
+	newFileName := joinstring.JoinOrigin(str) + ".pdf"
+	file, err := l.svcCtx.HdfsCli.Open("/evaluation/" + str + "/" + newFileName)
+	body, err = ioutil.ReadAll(file)
+	if err != nil {
+		return &types.DownloadResp{
+			Status: errs.InternalServer,
+			Msg:    errs.ErrorsMap[errs.InternalServer].Error(),
+		}, nil, "", nil
+	}
+	defer file.Close()
+	return &types.DownloadResp{
+		Status: errs.No,
+		Msg:    errs.ErrorsMap[errs.No].Error(),
+	}, body, "", nil
 }

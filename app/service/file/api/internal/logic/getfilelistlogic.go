@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"rpc/app/service/file/rpc/pb"
 
 	"rpc/app/service/file/api/internal/svc"
 	"rpc/app/service/file/api/internal/types"
@@ -24,7 +25,15 @@ func NewGetFileListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetFi
 }
 
 func (l *GetFileListLogic) GetFileList(req *types.GetFileListReq) (resp *types.GetFileListResp, err error) {
-	// todo: add your logic here and delete this line
-
-	return
+	response, err := l.svcCtx.FileRpc.GetFiles(l.ctx, &pb.GetFileReq{
+		Level: req.Level,
+		Month: req.Month,
+		Year:  req.Year,
+		Set:   req.Set,
+	})
+	return &types.GetFileListResp{
+		Status: response.StatusCode,
+		Msg:    response.StatusMsg,
+		List:   response.Data,
+	}, nil
 }
