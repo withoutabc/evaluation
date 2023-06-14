@@ -1,0 +1,21 @@
+Name: job.rpc
+ListenOn: 0.0.0.0:8080
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: job.rpc
+
+Ssh:
+  Addr: 192.168.10.102:22
+  User: root
+  Password: 224488
+
+Log:
+  ServiceName: user
+  Mode: file
+  Path: logs
+  Level: info
+  Encoding: plain
+  Compress: true
+  KeepDays: 7
+

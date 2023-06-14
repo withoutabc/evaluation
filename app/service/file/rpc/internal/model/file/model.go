@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/go-redis/redis/v8"
 	"gorm.io/gorm"
+	"log"
 	"rpc/app/service/file/errs"
 	"rpc/app/service/file/rpc/internal/model/dao/table"
 )
@@ -12,7 +13,7 @@ type (
 	Model interface {
 		Upload(ctx context.Context, level, year, month, set int32) int32
 		Download(ctx context.Context, id int64, downloadType int32) int32
-		GetFileList(ctx context.Context, level, year, month, set int32) ([]*table.File, int32)
+		GetFileList(ctx context.Context, level, year, month, set int32) ([]table.File, int32)
 	}
 	DefaultModel struct {
 		db  *gorm.DB
@@ -58,9 +59,10 @@ func (d *DefaultModel) Upload(ctx context.Context, level, year, month, set int32
 
 func (d *DefaultModel) Download(ctx context.Context, id int64, downloadType int32) int32 {
 	//查找文件是否存在
-	result := d.db.WithContext(ctx).Where(&table.File{ID: id})
+	var file table.File
+	result := d.db.WithContext(ctx).Where(&table.File{ID: id}).First(&file)
 	if err := result.Error; err != nil {
-		if err == gorm.ErrRecordNotFound {
+		if err == gorm.ErrRecordNotFound || file.ID == 0 {
 			return errs.FileNotExist
 		}
 		return errs.InternalServer
@@ -68,8 +70,9 @@ func (d *DefaultModel) Download(ctx context.Context, id int64, downloadType int3
 
 	//增加下载次数
 	if downloadType == 1 {
-		result = d.db.WithContext(ctx).Where(&table.File{ID: id}).UpdateColumn("download", gorm.Expr("download + ?", 1))
+		result = d.db.Table(table.TableNameFile).WithContext(ctx).Where(&table.File{ID: id}).UpdateColumn("download", gorm.Expr("download + ?", 1))
 		if err := result.Error; err != nil {
+			log.Println(err)
 			return errs.InternalServer
 		}
 	}
@@ -78,6 +81,7 @@ func (d *DefaultModel) Download(ctx context.Context, id int64, downloadType int3
 		var file table.File
 		result = d.db.WithContext(ctx).Where(&table.File{ID: id}).First(&file)
 		if err := result.Error; err != nil {
+			log.Println(err)
 			return errs.InternalServer
 		}
 		if file.Result != 2 {
@@ -86,14 +90,15 @@ func (d *DefaultModel) Download(ctx context.Context, id int64, downloadType int3
 		//否则下载次数+1
 		result = d.db.WithContext(ctx).Where(&table.File{ID: id}).UpdateColumn("result_download", gorm.Expr("result_download + ?", 1))
 		if err := result.Error; err != nil {
+			log.Println(err)
 			return errs.InternalServer
 		}
 	}
 	return errs.No
 }
 
-func (d *DefaultModel) GetFileList(ctx context.Context, level, year, month, set int32) ([]*table.File, int32) {
-	var files []*table.File
+func (d *DefaultModel) GetFileList(ctx context.Context, level, year, month, set int32) ([]table.File, int32) {
+	var files []table.File
 	cond := table.File{}
 	if level != 0 {
 		cond.Level = level
@@ -107,7 +112,7 @@ func (d *DefaultModel) GetFileList(ctx context.Context, level, year, month, set 
 	if set != 0 {
 		cond.Set = set
 	}
-	result := d.db.WithContext(ctx).Where(&cond).Find(files)
+	result := d.db.WithContext(ctx).Where(&cond).Find(&files)
 	if err := result.Error; err != nil {
 		return nil, errs.InternalServer
 	}

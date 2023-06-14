@@ -1,8 +1,9 @@
 package logic
 
 import (
+	"bufio"
 	"context"
-	"io/ioutil"
+	"log"
 	"rpc/app/service/file/errs"
 	"rpc/app/service/file/rpc/pb"
 	"rpc/utils/joinstring"
@@ -44,7 +45,10 @@ func (l *DownloadLogic) Download(req *types.DownloadReq) (resp *types.DownloadRe
 	str := joinstring.Join(req.Year, req.Month, req.Set, req.Level)
 	newFileName := joinstring.JoinOrigin(str) + ".pdf"
 	file, err := l.svcCtx.HdfsCli.Open("/evaluation/" + str + "/" + newFileName)
-	body, err = ioutil.ReadAll(file)
+	reader := bufio.NewReader(file)
+	body = make([]byte, maxFileSize)
+	//读取文件
+	_, err = reader.Read(body)
 	if err != nil {
 		return &types.DownloadResp{
 			Status: errs.InternalServer,
@@ -52,8 +56,9 @@ func (l *DownloadLogic) Download(req *types.DownloadReq) (resp *types.DownloadRe
 		}, nil, "", nil
 	}
 	defer file.Close()
+	log.Println("8")
 	return &types.DownloadResp{
 		Status: errs.No,
 		Msg:    errs.ErrorsMap[errs.No].Error(),
-	}, body, "", nil
+	}, body, newFileName, nil
 }

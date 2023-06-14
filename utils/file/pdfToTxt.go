@@ -1,5 +1,5 @@
 package file
 
-func PdfToTxt() {
+func main() {
 
 }

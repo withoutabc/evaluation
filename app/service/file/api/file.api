@@ -1,57 +1,60 @@
 syntax = "v1"
 
-type UploadReq {
-	Type  int32 `form:"type"`
-	Level int32 `form:"level"`
-	Year  int32 `form:"year"`
-	Month int32 `form:"month"`
-	Set   int32 `form:"set"`
-}
+type (
+    UploadReq {
+        Level int32 `form:"level"`
+        Year int32 `form:"year"`
+        Month int32 `form:"month"`
+        Set int32 `form:"set"`
+    }
 
-type UploadResp {
-	Status int32  `json:"status"`
-	Msg    string `json:"msg"`
-}
+    UploadResp {
+        Status int32 `json:"status"`
+        Msg string `json:"msg"`
+    }
+)
 
-type DownloadReq {
-	Type  int32 `form:"type"`
-	Id    int64 `form:"id"`
-	Level int32 `form:"level"`
-	Year  int32 `form:"year"`
-	Month int32 `form:"month"`
-	Set   int32 `form:"set"`
-}
+type (
+    DownloadReq {
+        Type int32 `form:"type"`
+        Id int64 `form:"id"`
+        Level int32 `form:"level"`
+        Year int32 `form:"year"`
+        Month int32 `form:"month"`
+        Set int32 `form:"set"`
+    }
 
-type DownloadResp {
-	Status int32  `json:"status"`
-	Msg    string `json:"msg"`
-}
+    DownloadResp {
+        Status int32 `json:"status"`
+        Msg string `json:"msg"`
+    }
+)
+type (
+    GetFileListReq {
+        Level int32 `form:"level,optional"`
+        Year int32 `form:"year,optional"`
+        Month int32 `form:"month,optional"`
+        Set int32 `form:"set,optional"`
+    }
 
-type GetFileListReq {
-	Level int32 `form:"level,optional"`
-	Year  int32 `form:"year,optional"`
-	Month int32 `form:"month,optional"`
-	Set   int32 `form:"set,optional"`
-}
-
-type GetFileListResp {
-	Status int32       `json:"status"`
-	Msg    string      `json:"msg"`
-	List   interface{} `json:"list,omitempty"`
-}
-
+    GetFileListResp {
+        Status int32 `json:"status"`
+        Msg string `json:"msg"`
+        List interface{} `json:"list,omitempty"`
+    }
+)
 @server(
-	middleware : CORSMIDDLEWARE,JWTMIDDLEWARE
+    middleware : CORSMIDDLEWARE,JWTMIDDLEWARE
 )
 
 service file {
-	@doc "上传文件"
-	@handler Upload
-	post /file/upload (UploadReq) returns (UploadResp)
-	@doc "下载文件"
-	@handler Download
-	post /file/download (DownloadReq) returns (DownloadResp)
-	@doc "获取文件信息"
-	@handler GetFileList
-	post /file/list (GetFileListReq) returns (GetFileListResp)
+    @doc "上传文件"
+    @handler Upload
+    post /file/upload (UploadReq) returns (UploadResp)
+    @doc "下载文件"
+    @handler Download
+    post /file/download (DownloadReq) returns (DownloadResp)
+    @doc "获取文件信息"
+    @handler GetFileList
+    post /file/list (GetFileListReq) returns (GetFileListResp)
 }

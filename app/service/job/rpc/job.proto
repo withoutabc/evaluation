@@ -1,3 +1,51 @@
 syntax = "proto3";
 
-package template;
+package file;
+
+option go_package = "./pb";
+
+
+message CountJobReq{
+  int32 level =1;
+  int32 year=2;
+  int32 month=3;
+  int32 set=4;
+}
+
+message CountJobResp{
+  int32 status_code=1;
+  int32 status_msg=2;
+  string job_name=3;
+}
+
+message ViewJobsReq{
+  int32 id=1;
+}
+
+message Jobs{
+  string jobID=1;
+  string jobName=2;
+  string jobStatus=3;
+}
+
+message ViewJobsResp{
+  repeated Jobs Jobs =1;
+}
+/*
+    {
+        Level int32 `form:"level"`
+        Year int32 `form:"year"`
+        Month int32 `form:"month"`
+        Set int32 `form:"set"`
+    }
+
+    CountJobResp {
+        Status int32 `json:"status"`
+        Msg string `json:"msg"`
+        JobName string `json:"job_name"`
+    }
+ */
+service job {
+  rpc CountJob(CountJobReq)returns(CountJobResp);
+rpc ViewJobs(ViewJobsReq)returns(ViewJobsResp);
+}

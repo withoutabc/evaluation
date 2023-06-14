@@ -1,0 +1,55 @@
+syntax = "v1"
+
+type (
+	CountJobReq {
+		Level int32 `form:"level"`
+		Year  int32 `form:"year"`
+		Month int32 `form:"month"`
+		Set   int32 `form:"set"`
+	}
+
+	CountJobResp {
+		Status  int32  `json:"status"`
+		Msg     string `json:"msg"`
+		JobName string `json:"job_name"`
+	}
+)
+
+type (
+	ViewJobsReq {
+		Id int64 `path:"id"`
+	}
+
+	ViewJobsResp {
+		Status  int32       `json:"status"`
+		Msg     string      `json:"msg"`
+		JobList interface{} `json:"jobList"`
+	}
+)
+
+//type (
+//    GetFileListReq {
+//        Level int32 `form:"level,optional"`
+//        Year int32 `form:"year,optional"`
+//        Month int32 `form:"month,optional"`
+//        Set int32 `form:"set,optional"`
+//    }
+//
+//    GetFileListResp {
+//        Status int32 `json:"status"`
+//        Msg string `json:"msg"`
+//        List interface{} `json:"list,omitempty"`
+//    }
+//)
+@server(
+	middleware : CORSMIDDLEWARE,JWTMIDDLEWARE
+)
+
+service job {
+	@doc "提交计数任务"
+	@handler CountJob
+	post /submit/job (CountJobReq) returns (CountJobResp)
+	@doc "查看作业情况"
+	@handler ViewJob
+	get /view/job/:id (ViewJobsReq) returns (ViewJobsResp)
+}

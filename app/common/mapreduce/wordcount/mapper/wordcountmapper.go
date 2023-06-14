@@ -4,15 +4,26 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"regexp"
 	"strings"
 )
 
 func main() {
+	// 创建正则表达式，用于匹配标点、汉字、特殊符号和's'
+	reg, err := regexp.Compile("[\\p{Han}]|[^a-zA-Z0-9\\s']+|'s")
+	if err != nil {
+		fmt.Println("正则表达式创建失败：", err)
+		return
+	}
 	scanner := bufio.NewScanner(os.Stdin) // 创建一个从标准输入读取数据的扫描器
-	for scanner.Scan() {                  // 循环扫描输入的每一行
-		line := scanner.Text()        // 获取扫描器当前扫描的行
-		words := strings.Fields(line) // 将行按空格分割成单词
-		for _, word := range words {  // 遍历每个单词
+	for scanner.Scan() {
+		// 对每一行应用正则表达式，替换掉匹配到的内容
+		line := reg.ReplaceAllString(scanner.Text(), "")
+		// 将所有单词转换为小写
+		words := strings.ToLower(line)
+		// 将转换后的单词按空格分割成数组
+		wordArr := strings.Fields(words)
+		for _, word := range wordArr { // 遍历每个单词
 			fmt.Printf("%s\t%d\n", word, 1) // 输出单词和1，作为mapreduce的输入
 		}
 	}

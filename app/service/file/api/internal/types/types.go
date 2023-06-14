@@ -2,7 +2,6 @@
 package types
 
 type UploadReq struct {
-	Type  int32 `form:"type"`
 	Level int32 `form:"level"`
 	Year  int32 `form:"year"`
 	Month int32 `form:"month"`

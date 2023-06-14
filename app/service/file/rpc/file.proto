@@ -17,6 +17,7 @@ message File{
   int32 month = 3;
   int32 set = 4;
   string update_time=5;
+  int64 id=6;
 }
 
 message GetFileResp{

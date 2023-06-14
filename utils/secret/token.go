@@ -29,8 +29,8 @@ func GenToken(userId int64, role string) (aToken, rToken string, c MyClaims, err
 		LoginTime: time.Now(),
 		Type:      "access",
 		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(time.Minute * 30).Unix(), // 过期时间
-			Issuer:    "YJX",                                   // 签发人
+			ExpiresAt: time.Now().Add(time.Minute * 3000).Unix(), // 过期时间
+			Issuer:    "YJX",                                     // 签发人
 		},
 	}
 	// 加密并获得完整的编码后的字符串token

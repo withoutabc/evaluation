@@ -1,9 +1,11 @@
 package handler
 
 import (
+	"log"
 	"net/http"
-	"path/filepath"
+	"net/url"
 	"rpc/app/service/file/api/internal/logic"
+	"rpc/app/service/file/errs"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
 	"rpc/app/service/file/api/internal/svc"
@@ -20,16 +22,18 @@ func DownloadHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 
 		l := logic.NewDownloadLogic(r.Context(), svcCtx)
 		resp, body, filename, err := l.Download(&req)
+		log.Println(resp, filename, err)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {
-			if body == nil {
+			if resp.Status != errs.No {
 				httpx.OkJsonCtx(r.Context(), w, resp)
 			} else {
 				// 设置响应头
 				header := w.Header()
-				header.Set("Content-Disposition", "attachment; filename="+filepath.Base(filename))
-				header.Set("Content-Type", http.DetectContentType(body))
+				header.Set("Content-Disposition", "attachment; filename*=UTF-8''"+url.PathEscape(filename))
+				header.Set("Content-Type", "application/octet-stream")
+				w.Write(body)
 			}
 		}
 	}
