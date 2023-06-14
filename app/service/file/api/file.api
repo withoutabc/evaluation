@@ -1,0 +1,43 @@
+syntax = "v1"
+
+type FileReq {
+	Type  int32 `form:"type"`
+	Level int32 `form:"level"`
+	Year  int32 `form:"year"`
+	Month int32 `form:"month"`
+	Set   int32 `form:"set"`
+}
+
+type FileResp {
+	Status int32  `json:"status"`
+	Msg    string `json:"msg"`
+}
+
+type GetFileListReq {
+	Level int32 `form:"level,optional"`
+	Year  int32 `form:"year,optional"`
+	Month int32 `form:"month,optional"`
+	Set   int32 `form:"set,optional"`
+}
+
+type GetFileListResp {
+	Status int32       `json:"status"`
+	Msg    string      `json:"msg"`
+	List   interface{} `json:"list,omitempty"`
+}
+
+@server(
+	middleware : CORSMIDDLEWARE,JWTMIDDLEWARE
+)
+
+service file {
+	@doc "上传文件"
+	@handler Upload
+	post /file/upload (FileReq) returns (FileResp)
+	@doc "下载文件"
+	@handler Download
+	post /file/download (FileReq) returns (FileResp)
+	@doc "获取文件信息"
+	@handler GetFileList
+	post /file/list (GetFileListReq) returns (GetFileListResp)
+}

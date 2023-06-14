@@ -1,0 +1,69 @@
+syntax = "v1"
+
+type (
+	RegisterReq {
+		Username string `form:"username"`
+		Password string `form:"password"`
+	}
+
+	RegisterResp {
+		Status int32  `json:"status"`
+		Msg    string `json:"msg"`
+	}
+)
+
+type (
+	LoginReq {
+		Username string `form:"username"`
+		Password string `form:"password"`
+	}
+
+	LoginInfo {
+		ID           int64  `json:"id,omitempty"`
+		Role         string `json:"role,omitempty"`
+		LoginTime    string `json:"login_time,omitempty"`
+		AccessToken  string `json:"access_token,omitempty"`
+		RefreshToken string `json:"refresh_token,omitempty"`
+	}
+
+	LoginResp {
+		Status int32     `json:"status"`
+		Msg    string    `json:"msg"`
+		Data   LoginInfo `json:"data,omitempty"`
+	}
+)
+
+@server(
+	middleware :CORSMIDDLEWARE
+)
+service user {
+	@doc "用户注册"
+	@handler Register
+	post /user/register (RegisterReq) returns (RegisterResp)
+	@doc "用户登录"
+	@handler Login
+	post /user/login (LoginReq) returns (LoginResp)
+}
+
+type (
+	RefreshReq {
+		RefreshToken string `form:"refresh_token"`
+	}
+
+	RefreshResp {
+		Status       int32  `json:"status"`
+		Msg          string `json:"msg"`
+		AccessToken  string `json:"access_token,omitempty"`
+		RefreshToken string `json:"refresh_token,omitempty"`
+	}
+)
+
+@server(
+	middleware :CORSMIDDLEWARE,JWTMIDDLEWARE
+)
+
+service user{
+	@doc "刷新token"
+	@handler Refresh
+	post /user/refresh (RefreshReq) returns (RefreshResp)
+}

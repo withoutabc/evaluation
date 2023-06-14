@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "./pb";
+
+//register
+message RegisterReq {
+  string username = 1;
+  string password = 2;
+}
+
+message RegisterResp {
+  int32 status_code = 1;
+  string status_msg = 2;
+
+}
+
+//login
+message LoginReq {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResp {
+  int32 status_code = 1;
+  string status_msg = 2;
+  Data data = 3;
+
+  message Data{
+    int64 id = 1;
+    string  role = 2;
+    string login_time = 3;
+    string access_token = 4;
+    string  refresh_token = 5;
+  }
+
+}
+
+//refresh
+message RefreshReq {
+  string refreshToken = 1;
+}
+
+message RefreshResp{
+  int32 status_code = 1;
+  string status_msg = 2;
+  string accessToken = 3;
+  string refreshToken = 4;
+}
+
+//service
+service User {
+  rpc Login(LoginReq) returns(LoginResp);
+  rpc Register(RegisterReq) returns(RegisterResp);
+  rpc Refresh(RefreshReq) returns(RefreshResp);
+}

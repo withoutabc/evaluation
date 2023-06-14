@@ -1,0 +1,28 @@
+Name: user.rpc
+ListenOn: 0.0.0.0:8888
+
+Etcd:
+   Hosts:
+    - 127.0.0.1:2379
+   Key: user.rpc
+Mysql:
+  DataSource: "root:224488@tcp(127.0.0.1:3306)/evaluation?charset=utf8mb4&loc=Local&parseTime=true"
+
+Telemetry:
+  Name: user.rpc
+  Endpoint: http://jaeger:14268/api/traces
+  Sampler: 1.0
+  Batcher: jaeger
+#RedisConf:
+#   Host: 127.0.0.1
+#   Port: 6379
+#   Password: ""
+#   DB: 0
+Log:
+  ServiceName: user
+  Mode: file
+  Path: logs
+  Level: info
+  Encoding: plain
+  Compress: true
+  KeepDays: 7

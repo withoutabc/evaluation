@@ -1,0 +1,837 @@
+2023-06-13T12:43:07.262+08:00	[31;1m error [0m	bad resolver state	caller=internal/discovbuilder.go:34
+2023-06-13T16:02:43.130+08:00	[31;1m error [0m	bad resolver state	caller=internal/discovbuilder.go:34
+2023-06-13T16:03:52.217+08:00	[31;1m error [0m	bad resolver state	caller=internal/discovbuilder.go:34
+2023-06-13T16:08:36.989+08:00	[31;1m error [0m	bad resolver state	caller=internal/discovbuilder.go:34
+2023-06-13T16:11:21.986+08:00	[31;1m error [0m	bad resolver state	caller=internal/discovbuilder.go:34
+2023-06-13T16:16:19.816+08:00	[31;1m error [0m	listen tcp 0.0.0.0:8888: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.	caller=rest/server.go:314
+2023-06-13T16:16:57.126+08:00	[31;1m error [0m	listen tcp 0.0.0.0:8888: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.	caller=rest/server.go:314
+2023-06-13T16:48:56.218+08:00	[31;1m error [0m	fail - etcd:/127.0.0.1:2379/user.rpc/user.User/Register - username:"11111" password:"22222" - rpc error: code = Unknown desc = 服务器内部错误	duration=52.0ms	caller=clientinterceptors/durationinterceptor.go:35	trace=6c4b52516067e39de6d8f8b636a20dbf	span=6642855311f9d2ee
+2023-06-13T16:48:56.218+08:00	[31;1m error [0m	(/user/register - 127.0.0.1:56141) runtime error: invalid memory address or nil pointer dereference
+goroutine 40 [running]:
+runtime/debug.Stack()
+	C:/Program Files/Go/src/runtime/debug/stack.go:24 +0x65
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1.1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:16 +0x66
+panic({0x18b6700, 0x2c888a0})
+	C:/Program Files/Go/src/runtime/panic.go:884 +0x212
+rpc/app/service/user/api/internal/logic.(*RegisterLogic).Register(0xc0004bdc70, 0xc00009b240)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/logic/registerlogic.go:33 +0xae
+rpc/app/service/user/api/internal/handler.RegisterHandler.func1({0x1e368f0, 0xc0001de4e0}, 0xc0003e8500)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/handler/registerhandler.go:21 +0x1a7
+rpc/app/common/middleware.(*CORSMIDDLEWAREMiddleware).Handle.func1({0x1e368f0, 0xc0001de4e0}, 0xc0003e8500)
+	E:/我的菜鸡项目实战/evaluation/app/common/middleware/corsmiddleware.go:23 +0x333
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x1e368f0?, 0xc0001de4e0?}, 0x0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.GunzipHandler.func1({0x1e368f0, 0xc0001de4e0}, 0xc0003e8500)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/gunziphandler.go:26 +0xe9
+net/http.HandlerFunc.ServeHTTP(0xedc1a2478?, {0x1e368f0?, 0xc0001de4e0?}, 0xd870f689?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MaxBytesHandler.func2.1({0x1e368f0?, 0xc0001de4e0?}, 0x2cbc920?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/maxbyteshandler.go:24 +0xff
+net/http.HandlerFunc.ServeHTTP(0xc0005e5e78?, {0x1e368f0?, 0xc0001de4e0?}, 0xc0005e5ed8?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MetricHandler.func1.1({0x1e368f0, 0xc0001de4e0}, 0xc00064e530?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/metrichandler.go:21 +0xd5
+net/http.HandlerFunc.ServeHTTP(0x749d80?, {0x1e368f0?, 0xc0001de4e0?}, 0xc0005e5f30?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1({0x1e368f0?, 0xc0001de4e0?}, 0xc0005e5f98?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:21 +0x83
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x1e368f0?, 0xc0001de4e0?}, 0x286fe5?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP.func1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:81 +0x7c
+created by github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:75 +0x350
+	caller=internal/log.go:57	trace=6c4b52516067e39de6d8f8b636a20dbf	span=6a24fc4164c53603
+2023-06-13T16:48:56.218+08:00	[31;1m error [0m	[HTTP] [103;90;1m 500 [0m - [46;97;1m POST [0m /user/register - 127.0.0.1:56141 - PostmanRuntime-ApipostRuntime/1.1.0
+POST /user/register HTTP/1.1
+Host: 127.0.0.1:1001
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 280
+Content-Type: multipart/form-data; boundary=--------------------------464720856443500249876888
+User-Agent: PostmanRuntime-ApipostRuntime/1.1.0
+
+----------------------------464720856443500249876888
+Content-Disposition: form-data; name="username"
+
+11111
+----------------------------464720856443500249876888
+Content-Disposition: form-data; name="password"
+
+22222
+----------------------------464720856443500249876888--
+	duration=52.0ms	caller=handler/loghandler.go:162	trace=6c4b52516067e39de6d8f8b636a20dbf	span=6a24fc4164c53603
+2023-06-13T16:49:06.713+08:00	[31;1m error [0m	fail - etcd:/127.0.0.1:2379/user.rpc/user.User/Register - username:"11111" password:"22222" - rpc error: code = Unknown desc = 服务器内部错误	duration=2.2ms	caller=clientinterceptors/durationinterceptor.go:35	trace=3cd29957bd75bbd5b4e572f2b3d4581d	span=77bd95265e438208
+2023-06-13T16:49:06.714+08:00	[31;1m error [0m	(/user/register - 127.0.0.1:56149) runtime error: invalid memory address or nil pointer dereference
+goroutine 42 [running]:
+runtime/debug.Stack()
+	C:/Program Files/Go/src/runtime/debug/stack.go:24 +0x65
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1.1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:16 +0x66
+panic({0x18b6700, 0x2c888a0})
+	C:/Program Files/Go/src/runtime/panic.go:884 +0x212
+rpc/app/service/user/api/internal/logic.(*RegisterLogic).Register(0xc00053bc70, 0xc00009b8e0)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/logic/registerlogic.go:33 +0xae
+rpc/app/service/user/api/internal/handler.RegisterHandler.func1({0x1e368f0, 0xc0001dfc80}, 0xc0003e8a00)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/handler/registerhandler.go:21 +0x1a7
+rpc/app/common/middleware.(*CORSMIDDLEWAREMiddleware).Handle.func1({0x1e368f0, 0xc0001dfc80}, 0xc0003e8a00)
+	E:/我的菜鸡项目实战/evaluation/app/common/middleware/corsmiddleware.go:23 +0x333
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x1e368f0?, 0xc0001dfc80?}, 0xc0001a12f0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.GunzipHandler.func1({0x1e368f0, 0xc0001dfc80}, 0xc0003e8a00)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/gunziphandler.go:26 +0xe9
+net/http.HandlerFunc.ServeHTTP(0xedc1a2482?, {0x1e368f0?, 0xc0001dfc80?}, 0x34ce7d661?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MaxBytesHandler.func2.1({0x1e368f0?, 0xc0001dfc80?}, 0x2cbc920?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/maxbyteshandler.go:24 +0xff
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x1e368f0?, 0xc0001dfc80?}, 0x0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MetricHandler.func1.1({0x1e368f0, 0xc0001dfc80}, 0x0?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/metrichandler.go:21 +0xd5
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x1e368f0?, 0xc0001dfc80?}, 0x0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1({0x1e368f0?, 0xc0001dfc80?}, 0x0?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:21 +0x83
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x1e368f0?, 0xc0001dfc80?}, 0x0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP.func1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:81 +0x7c
+created by github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:75 +0x350
+	caller=internal/log.go:57	trace=3cd29957bd75bbd5b4e572f2b3d4581d	span=371dde749c6d8c0b
+2023-06-13T16:49:06.714+08:00	[31;1m error [0m	[HTTP] [103;90;1m 500 [0m - [46;97;1m POST [0m /user/register - 127.0.0.1:56149 - PostmanRuntime-ApipostRuntime/1.1.0
+POST /user/register HTTP/1.1
+Host: 127.0.0.1:1001
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 29
+Content-Type: application/x-www-form-urlencoded
+User-Agent: PostmanRuntime-ApipostRuntime/1.1.0
+
+username=11111&password=22222	duration=3.6ms	caller=handler/loghandler.go:162	trace=3cd29957bd75bbd5b4e572f2b3d4581d	span=371dde749c6d8c0b
+2023-06-13T17:26:35.710+08:00	[31;1m error [0m	fail - etcd:/127.0.0.1:2379/user.rpc/user.User/Login - username:"11111" password:"2222" - rpc error: code = Unknown desc = 密码错误	duration=2.1ms	caller=clientinterceptors/durationinterceptor.go:35	trace=2c7a6cc64f4a7729aee0455989296547	span=5954593501d85c3d
+2023-06-13T17:26:35.711+08:00	[31;1m error [0m	(/user/login - 127.0.0.1:59011) runtime error: invalid memory address or nil pointer dereference
+goroutine 33 [running]:
+runtime/debug.Stack()
+	C:/Program Files/Go/src/runtime/debug/stack.go:24 +0x65
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1.1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:16 +0x66
+panic({0x2306700, 0x36d88a0})
+	C:/Program Files/Go/src/runtime/panic.go:884 +0x212
+rpc/app/service/user/api/internal/logic.(*LoginLogic).Login(0xc00047bc70, 0xc00032e7c0)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/logic/loginlogic.go:32 +0xae
+rpc/app/service/user/api/internal/handler.LoginHandler.func1({0x2886950, 0xc00017fbc0}, 0xc0003b0800)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/handler/loginhandler.go:21 +0x1a7
+rpc/app/common/middleware.(*CORSMIDDLEWAREMiddleware).Handle.func1({0x2886950, 0xc00017fbc0}, 0xc0003b0800)
+	E:/我的菜鸡项目实战/evaluation/app/common/middleware/corsmiddleware.go:23 +0x333
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x2886950?, 0xc00017fbc0?}, 0xc0003313b0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.GunzipHandler.func1({0x2886950, 0xc00017fbc0}, 0xc0003b0800)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/gunziphandler.go:26 +0xe9
+net/http.HandlerFunc.ServeHTTP(0xedc1a2d4b?, {0x2886950?, 0xc00017fbc0?}, 0xb89fb68d?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MaxBytesHandler.func2.1({0x2886950?, 0xc00017fbc0?}, 0x370c940?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/maxbyteshandler.go:24 +0xff
+net/http.HandlerFunc.ServeHTTP(0xc000469e78?, {0x2886950?, 0xc00017fbc0?}, 0xc000469ed8?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MetricHandler.func1.1({0x2886950, 0xc00017fbc0}, 0xc0001c0470?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/metrichandler.go:21 +0xd5
+net/http.HandlerFunc.ServeHTTP(0x1199d80?, {0x2886950?, 0xc00017fbc0?}, 0xc000469f30?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1({0x2886950?, 0xc00017fbc0?}, 0x0?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:21 +0x83
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x2886950?, 0xc00017fbc0?}, 0xcd6fe5?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP.func1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:81 +0x7c
+created by github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:75 +0x350
+	caller=internal/log.go:57	trace=2c7a6cc64f4a7729aee0455989296547	span=caa1fe2e50f0896b
+2023-06-13T17:26:35.711+08:00	[31;1m error [0m	[HTTP] [103;90;1m 500 [0m - [46;97;1m POST [0m /user/login - 127.0.0.1:59011 - PostmanRuntime-ApipostRuntime/1.1.0
+POST /user/login HTTP/1.1
+Host: 127.0.0.1:1001
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 28
+Content-Type: application/x-www-form-urlencoded
+User-Agent: PostmanRuntime-ApipostRuntime/1.1.0
+
+username=11111&password=2222	duration=3.1ms	caller=handler/loghandler.go:162	trace=2c7a6cc64f4a7729aee0455989296547	span=caa1fe2e50f0896b
+2023-06-13T17:26:43.250+08:00	[31;1m error [0m	fail - etcd:/127.0.0.1:2379/user.rpc/user.User/Login - username:"11111" password:"2222" - rpc error: code = Unknown desc = 密码错误	duration=1.2ms	caller=clientinterceptors/durationinterceptor.go:35	trace=421c2d4b4ca406a563ee7eda306a914c	span=0020bd028c6b59a0
+2023-06-13T17:26:43.251+08:00	[31;1m error [0m	(/user/login - 127.0.0.1:59017) runtime error: invalid memory address or nil pointer dereference
+goroutine 114 [running]:
+runtime/debug.Stack()
+	C:/Program Files/Go/src/runtime/debug/stack.go:24 +0x65
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1.1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:16 +0x66
+panic({0x2306700, 0x36d88a0})
+	C:/Program Files/Go/src/runtime/panic.go:884 +0x212
+rpc/app/service/user/api/internal/logic.(*LoginLogic).Login(0xc00065fc70, 0xc0001c4140)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/logic/loginlogic.go:32 +0xae
+rpc/app/service/user/api/internal/handler.LoginHandler.func1({0x2886950, 0xc0001c0600}, 0xc000664400)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/handler/loginhandler.go:21 +0x1a7
+rpc/app/common/middleware.(*CORSMIDDLEWAREMiddleware).Handle.func1({0x2886950, 0xc0001c0600}, 0xc000664400)
+	E:/我的菜鸡项目实战/evaluation/app/common/middleware/corsmiddleware.go:23 +0x333
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x2886950?, 0xc0001c0600?}, 0xc0006f9d88?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.GunzipHandler.func1({0x2886950, 0xc0001c0600}, 0xc000664400)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/gunziphandler.go:26 +0xe9
+net/http.HandlerFunc.ServeHTTP(0xedc1a2d53?, {0x2886950?, 0xc0001c0600?}, 0x27a229d8d?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MaxBytesHandler.func2.1({0x2886950?, 0xc0001c0600?}, 0x370c940?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/maxbyteshandler.go:24 +0xff
+net/http.HandlerFunc.ServeHTTP(0x3?, {0x2886950?, 0xc0001c0600?}, 0x2359c98?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MetricHandler.func1.1({0x2886950, 0xc0001c0600}, 0x4?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/metrichandler.go:21 +0xd5
+net/http.HandlerFunc.ServeHTTP(0xc0006f9f30?, {0x2886950?, 0xc0001c0600?}, 0xc0006f9f48?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1({0x2886950?, 0xc0001c0600?}, 0xfdd39e?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:21 +0x83
+net/http.HandlerFunc.ServeHTTP(0xc000558050?, {0x2886950?, 0xc0001c0600?}, 0xcd6fe5?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP.func1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:81 +0x7c
+created by github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:75 +0x350
+	caller=internal/log.go:57	trace=421c2d4b4ca406a563ee7eda306a914c	span=b786bbe152292e04
+2023-06-13T17:26:43.251+08:00	[31;1m error [0m	[HTTP] [103;90;1m 500 [0m - [46;97;1m POST [0m /user/login - 127.0.0.1:59017 - PostmanRuntime-ApipostRuntime/1.1.0
+POST /user/login HTTP/1.1
+Host: 127.0.0.1:1001
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 28
+Content-Type: application/x-www-form-urlencoded
+User-Agent: PostmanRuntime-ApipostRuntime/1.1.0
+
+username=11111&password=2222	duration=1.7ms	caller=handler/loghandler.go:162	trace=421c2d4b4ca406a563ee7eda306a914c	span=b786bbe152292e04
+2023-06-13T17:28:44.215+08:00	[31;1m error [0m	fail - etcd:/127.0.0.1:2379/user.rpc/user.User/Login - username:"11111" password:"2222" - rpc error: code = Unknown desc = 密码错误	duration=0.8ms	caller=clientinterceptors/durationinterceptor.go:35	trace=f06a1d464aab157a32fd5af9fc5ce8b5	span=ded3f9be33571b26
+2023-06-13T17:28:44.215+08:00	[31;1m error [0m	(/user/login - 127.0.0.1:59195) runtime error: invalid memory address or nil pointer dereference
+goroutine 102 [running]:
+runtime/debug.Stack()
+	C:/Program Files/Go/src/runtime/debug/stack.go:24 +0x65
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1.1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:16 +0x66
+panic({0x2146700, 0x35188a0})
+	C:/Program Files/Go/src/runtime/panic.go:884 +0x212
+rpc/app/service/user/api/internal/logic.(*LoginLogic).Login(0xc000551c70, 0xc0005c8520)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/logic/loginlogic.go:32 +0xae
+rpc/app/service/user/api/internal/handler.LoginHandler.func1({0x26c6950, 0xc000232360}, 0xc000590500)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/handler/loginhandler.go:21 +0x1a7
+rpc/app/common/middleware.(*CORSMIDDLEWAREMiddleware).Handle.func1({0x26c6950, 0xc000232360}, 0xc000590500)
+	E:/我的菜鸡项目实战/evaluation/app/common/middleware/corsmiddleware.go:23 +0x333
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x26c6950?, 0xc000232360?}, 0xc0005caf30?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.GunzipHandler.func1({0x26c6950, 0xc000232360}, 0xc000590500)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/gunziphandler.go:26 +0xe9
+net/http.HandlerFunc.ServeHTTP(0xedc1a2dcc?, {0x26c6950?, 0xc000232360?}, 0x23312917d?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MaxBytesHandler.func2.1({0x26c6950?, 0xc000232360?}, 0x354c940?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/maxbyteshandler.go:24 +0xff
+net/http.HandlerFunc.ServeHTTP(0xc0002c1e78?, {0x26c6950?, 0xc000232360?}, 0xc0002c1ed8?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MetricHandler.func1.1({0x26c6950, 0xc000232360}, 0xc000511c70?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/metrichandler.go:21 +0xd5
+net/http.HandlerFunc.ServeHTTP(0xfd9d80?, {0x26c6950?, 0xc000232360?}, 0xc0002c1f30?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1({0x26c6950?, 0xc000232360?}, 0xc0000cce40?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:21 +0x83
+net/http.HandlerFunc.ServeHTTP(0xc0000cced0?, {0x26c6950?, 0xc000232360?}, 0xb16fe5?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP.func1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:81 +0x7c
+created by github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:75 +0x350
+	caller=internal/log.go:57	trace=f06a1d464aab157a32fd5af9fc5ce8b5	span=3be4c3ed15d5753e
+2023-06-13T17:28:44.215+08:00	[31;1m error [0m	[HTTP] [103;90;1m 500 [0m - [46;97;1m POST [0m /user/login - 127.0.0.1:59195 - PostmanRuntime-ApipostRuntime/1.1.0
+POST /user/login HTTP/1.1
+Host: 127.0.0.1:1001
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 28
+Content-Type: application/x-www-form-urlencoded
+User-Agent: PostmanRuntime-ApipostRuntime/1.1.0
+
+username=11111&password=2222	duration=1.1ms	caller=handler/loghandler.go:162	trace=f06a1d464aab157a32fd5af9fc5ce8b5	span=3be4c3ed15d5753e
+2023-06-13T17:30:52.247+08:00	[31;1m error [0m	fail - etcd:/127.0.0.1:2379/user.rpc/user.User/Register - username:"11111" password:"2222" - rpc error: code = Unknown desc = 用户名重复	duration=1.2ms	caller=clientinterceptors/durationinterceptor.go:35	trace=82715682475fc0b635b90a7d1486a1c9	span=0ed5d601dcef1889
+2023-06-13T17:30:52.247+08:00	[31;1m error [0m	(/user/register - 127.0.0.1:59344) runtime error: invalid memory address or nil pointer dereference
+goroutine 88 [running]:
+runtime/debug.Stack()
+	C:/Program Files/Go/src/runtime/debug/stack.go:24 +0x65
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1.1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:16 +0x66
+panic({0x2146700, 0x35188a0})
+	C:/Program Files/Go/src/runtime/panic.go:884 +0x212
+rpc/app/service/user/api/internal/logic.(*RegisterLogic).Register(0xc000165c70, 0xc00039c3a0)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/logic/registerlogic.go:33 +0xae
+rpc/app/service/user/api/internal/handler.RegisterHandler.func1({0x26c6950, 0xc000286000}, 0xc00034a600)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/handler/registerhandler.go:21 +0x1a7
+rpc/app/common/middleware.(*CORSMIDDLEWAREMiddleware).Handle.func1({0x26c6950, 0xc000286000}, 0xc00034a600)
+	E:/我的菜鸡项目实战/evaluation/app/common/middleware/corsmiddleware.go:23 +0x333
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x26c6950?, 0xc000286000?}, 0x0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.GunzipHandler.func1({0x26c6950, 0xc000286000}, 0xc00034a600)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/gunziphandler.go:26 +0xe9
+net/http.HandlerFunc.ServeHTTP(0xedc1a2e4c?, {0x26c6950?, 0xc000286000?}, 0x200261d615?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MaxBytesHandler.func2.1({0x26c6950?, 0xc000286000?}, 0x354c940?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/maxbyteshandler.go:24 +0xff
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x26c6950?, 0xc000286000?}, 0x0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MetricHandler.func1.1({0x26c6950, 0xc000286000}, 0xc000135fb0?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/metrichandler.go:21 +0xd5
+net/http.HandlerFunc.ServeHTTP(0xc0000ac2a0?, {0x26c6950?, 0xc000286000?}, 0xc000104e48?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1({0x26c6950?, 0xc000286000?}, 0xc000135f98?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:21 +0x83
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x26c6950?, 0xc000286000?}, 0xb16fe5?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP.func1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:81 +0x7c
+created by github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:75 +0x350
+	caller=internal/log.go:57	trace=82715682475fc0b635b90a7d1486a1c9	span=485c9c4be425dc84
+2023-06-13T17:30:52.247+08:00	[31;1m error [0m	[HTTP] [103;90;1m 500 [0m - [46;97;1m POST [0m /user/register - 127.0.0.1:59344 - PostmanRuntime-ApipostRuntime/1.1.0
+POST /user/register HTTP/1.1
+Host: 127.0.0.1:1001
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 28
+Content-Type: application/x-www-form-urlencoded
+User-Agent: PostmanRuntime-ApipostRuntime/1.1.0
+
+username=11111&password=2222	duration=1.8ms	caller=handler/loghandler.go:162	trace=82715682475fc0b635b90a7d1486a1c9	span=485c9c4be425dc84
+2023-06-13T17:35:59.595+08:00	[31;1m error [0m	fail - etcd:/127.0.0.1:2379/user.rpc/user.User/Register - username:"11111"  password:"2222" - rpc error: code = Unknown desc = 用户名重复	duration=2.8ms	caller=clientinterceptors/durationinterceptor.go:35	trace=aac8aa50eb75a2e796d15c5222a557d7	span=10ea3e92226a1db3
+2023-06-13T17:35:59.595+08:00	[31;1m error [0m	(/user/register - 127.0.0.1:59793) runtime error: invalid memory address or nil pointer dereference
+goroutine 32 [running]:
+runtime/debug.Stack()
+	C:/Program Files/Go/src/runtime/debug/stack.go:24 +0x65
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1.1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:16 +0x66
+panic({0x1c76700, 0x30488a0})
+	C:/Program Files/Go/src/runtime/panic.go:884 +0x212
+rpc/app/service/user/api/internal/logic.(*RegisterLogic).Register(0xc0001a1c70, 0xc0001f0ae0)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/logic/registerlogic.go:33 +0xae
+rpc/app/service/user/api/internal/handler.RegisterHandler.func1({0x21f6950, 0xc000217f20}, 0xc000324b00)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/handler/registerhandler.go:21 +0x1a7
+rpc/app/common/middleware.(*CORSMIDDLEWAREMiddleware).Handle.func1({0x21f6950, 0xc000217f20}, 0xc000324b00)
+	E:/我的菜鸡项目实战/evaluation/app/common/middleware/corsmiddleware.go:23 +0x333
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x21f6950?, 0xc000217f20?}, 0xc0001b1db0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.GunzipHandler.func1({0x21f6950, 0xc000217f20}, 0xc000324b00)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/gunziphandler.go:26 +0xe9
+net/http.HandlerFunc.ServeHTTP(0xedc1a2f7f?, {0x21f6950?, 0xc000217f20?}, 0x1184798fd?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MaxBytesHandler.func2.1({0x21f6950?, 0xc000217f20?}, 0x307c940?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/maxbyteshandler.go:24 +0xff
+net/http.HandlerFunc.ServeHTTP(0xc0001b1e78?, {0x21f6950?, 0xc000217f20?}, 0xc0001b1ed8?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MetricHandler.func1.1({0x21f6950, 0xc000217f20}, 0xc0007af5b0?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/metrichandler.go:21 +0xd5
+net/http.HandlerFunc.ServeHTTP(0xb09d80?, {0x21f6950?, 0xc000217f20?}, 0xc0001b1f30?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1({0x21f6950?, 0xc000217f20?}, 0xc0001b1f50?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:21 +0x83
+net/http.HandlerFunc.ServeHTTP(0xb47fe5?, {0x21f6950?, 0xc000217f20?}, 0x646fe5?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP.func1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:81 +0x7c
+created by github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:75 +0x350
+	caller=internal/log.go:57	trace=aac8aa50eb75a2e796d15c5222a557d7	span=af25d14813b1a781
+2023-06-13T17:35:59.595+08:00	[31;1m error [0m	[HTTP] [103;90;1m 500 [0m - [46;97;1m POST [0m /user/register - 127.0.0.1:59793 - PostmanRuntime-ApipostRuntime/1.1.0
+POST /user/register HTTP/1.1
+Host: 127.0.0.1:1001
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 28
+Content-Type: application/x-www-form-urlencoded
+User-Agent: PostmanRuntime-ApipostRuntime/1.1.0
+
+username=11111&password=2222	duration=2.8ms	caller=handler/loghandler.go:162	trace=aac8aa50eb75a2e796d15c5222a557d7	span=af25d14813b1a781
+2023-06-13T17:36:10.745+08:00	[31;1m error [0m	fail - etcd:/127.0.0.1:2379/user.rpc/user.User/Login - username:"11111"  password:"2222" - rpc error: code = Unknown desc = 密码错误	duration=2.2ms	caller=clientinterceptors/durationinterceptor.go:35	trace=fd8ca4b8ce1ebf4ba5dfdd9601018eab	span=07d8da0364b45cb1
+2023-06-13T17:36:10.745+08:00	[31;1m error [0m	(/user/login - 127.0.0.1:59810) runtime error: invalid memory address or nil pointer dereference
+goroutine 85 [running]:
+runtime/debug.Stack()
+	C:/Program Files/Go/src/runtime/debug/stack.go:24 +0x65
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1.1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:16 +0x66
+panic({0x1c76700, 0x30488a0})
+	C:/Program Files/Go/src/runtime/panic.go:884 +0x212
+rpc/app/service/user/api/internal/logic.(*LoginLogic).Login(0xc000591c70, 0xc00009b660)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/logic/loginlogic.go:32 +0xae
+rpc/app/service/user/api/internal/handler.LoginHandler.func1({0x21f6950, 0xc0007afda0}, 0xc000584900)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/handler/loginhandler.go:21 +0x1a7
+rpc/app/common/middleware.(*CORSMIDDLEWAREMiddleware).Handle.func1({0x21f6950, 0xc0007afda0}, 0xc000584900)
+	E:/我的菜鸡项目实战/evaluation/app/common/middleware/corsmiddleware.go:23 +0x333
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x21f6950?, 0xc0007afda0?}, 0xc0000296e0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.GunzipHandler.func1({0x21f6950, 0xc0007afda0}, 0xc000584900)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/gunziphandler.go:26 +0xe9
+net/http.HandlerFunc.ServeHTTP(0xedc1a2f8a?, {0x21f6950?, 0xc0007afda0?}, 0x3b0ec5fb5?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MaxBytesHandler.func2.1({0x21f6950?, 0xc0007afda0?}, 0x307c940?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/maxbyteshandler.go:24 +0xff
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x21f6950?, 0xc0007afda0?}, 0x28846830a28?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MetricHandler.func1.1({0x21f6950, 0xc0007afda0}, 0x1eab700?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/metrichandler.go:21 +0xd5
+net/http.HandlerFunc.ServeHTTP(0xc00046bfa8?, {0x21f6950?, 0xc0007afda0?}, 0x0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1({0x21f6950?, 0xc0007afda0?}, 0x0?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:21 +0x83
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x21f6950?, 0xc0007afda0?}, 0x0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP.func1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:81 +0x7c
+created by github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:75 +0x350
+	caller=internal/log.go:57	trace=fd8ca4b8ce1ebf4ba5dfdd9601018eab	span=725fc90028493c63
+2023-06-13T17:36:10.745+08:00	[31;1m error [0m	[HTTP] [103;90;1m 500 [0m - [46;97;1m POST [0m /user/login - 127.0.0.1:59810 - PostmanRuntime-ApipostRuntime/1.1.0
+POST /user/login HTTP/1.1
+Host: 127.0.0.1:1001
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 28
+Content-Type: application/x-www-form-urlencoded
+User-Agent: PostmanRuntime-ApipostRuntime/1.1.0
+
+username=11111&password=2222	duration=2.4ms	caller=handler/loghandler.go:162	trace=fd8ca4b8ce1ebf4ba5dfdd9601018eab	span=725fc90028493c63
+2023-06-13T17:39:20.731+08:00	[31;1m error [0m	fail - etcd:/127.0.0.1:2379/user.rpc/user.User/Register - username:"11111"  password:"2222" - rpc error: code = Unknown desc = 用户名重复	duration=1.8ms	caller=clientinterceptors/durationinterceptor.go:35	trace=0bdfb3db2c8941eabddf1dd47a64f4b3	span=2d6b6c812019389a
+2023-06-13T17:39:20.731+08:00	[31;1m error [0m	(/user/register - 127.0.0.1:60098) runtime error: invalid memory address or nil pointer dereference
+goroutine 114 [running]:
+runtime/debug.Stack()
+	C:/Program Files/Go/src/runtime/debug/stack.go:24 +0x65
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1.1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:16 +0x66
+panic({0x1fa6700, 0x33788c0})
+	C:/Program Files/Go/src/runtime/panic.go:884 +0x212
+rpc/app/service/user/api/internal/logic.(*RegisterLogic).Register(0xc000709c70, 0xc000120c20)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/logic/registerlogic.go:34 +0xb9
+rpc/app/service/user/api/internal/handler.RegisterHandler.func1({0x2526950, 0xc000259f80}, 0xc000310b00)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/handler/registerhandler.go:21 +0x1a7
+rpc/app/common/middleware.(*CORSMIDDLEWAREMiddleware).Handle.func1({0x2526950, 0xc000259f80}, 0xc000310b00)
+	E:/我的菜鸡项目实战/evaluation/app/common/middleware/corsmiddleware.go:23 +0x333
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x2526950?, 0xc000259f80?}, 0xc000210540?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.GunzipHandler.func1({0x2526950, 0xc000259f80}, 0xc000310b00)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/gunziphandler.go:26 +0xe9
+net/http.HandlerFunc.ServeHTTP(0xedc1a3048?, {0x2526950?, 0xc000259f80?}, 0x205430331?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MaxBytesHandler.func2.1({0x2526950?, 0xc000259f80?}, 0x33ac960?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/maxbyteshandler.go:24 +0xff
+net/http.HandlerFunc.ServeHTTP(0xc0003ede78?, {0x2526950?, 0xc000259f80?}, 0xc0003eded8?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MetricHandler.func1.1({0x2526950, 0xc000259f80}, 0xc000259eb0?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/metrichandler.go:21 +0xd5
+net/http.HandlerFunc.ServeHTTP(0xe39d80?, {0x2526950?, 0xc000259f80?}, 0xc0003edf30?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1({0x2526950?, 0xc000259f80?}, 0x0?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:21 +0x83
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x2526950?, 0xc000259f80?}, 0x976fe5?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP.func1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:81 +0x7c
+created by github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:75 +0x350
+	caller=internal/log.go:57	trace=0bdfb3db2c8941eabddf1dd47a64f4b3	span=c117c5d25093638a
+2023-06-13T17:39:20.731+08:00	[31;1m error [0m	[HTTP] [103;90;1m 500 [0m - [46;97;1m POST [0m /user/register - 127.0.0.1:60098 - PostmanRuntime-ApipostRuntime/1.1.0
+POST /user/register HTTP/1.1
+Host: 127.0.0.1:1001
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 28
+Content-Type: application/x-www-form-urlencoded
+User-Agent: PostmanRuntime-ApipostRuntime/1.1.0
+
+username=11111&password=2222	duration=2.4ms	caller=handler/loghandler.go:162	trace=0bdfb3db2c8941eabddf1dd47a64f4b3	span=c117c5d25093638a
+2023-06-13T17:41:30.919+08:00	[31;1m error [0m	fail - etcd:/127.0.0.1:2379/user.rpc/user.User/Register - username:"11111"  password:"2222" - rpc error: code = Unknown desc = 用户名重复	duration=2.4ms	caller=clientinterceptors/durationinterceptor.go:35	trace=10405c4a7087aa6401500b90e7622d95	span=177f4623a5a04fb0
+2023-06-13T17:41:30.920+08:00	[31;1m error [0m	(/user/register - 127.0.0.1:60304) runtime error: invalid memory address or nil pointer dereference
+goroutine 73 [running]:
+runtime/debug.Stack()
+	C:/Program Files/Go/src/runtime/debug/stack.go:24 +0x65
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1.1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:16 +0x66
+panic({0x1d96700, 0x31688c0})
+	C:/Program Files/Go/src/runtime/panic.go:884 +0x212
+rpc/app/service/user/api/internal/logic.(*RegisterLogic).Register(0xc000433c70, 0xc00039d020)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/logic/registerlogic.go:34 +0xb9
+rpc/app/service/user/api/internal/handler.RegisterHandler.func1({0x2316950, 0xc0003a2d80}, 0xc0000f4700)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/handler/registerhandler.go:21 +0x1a7
+rpc/app/common/middleware.(*CORSMIDDLEWAREMiddleware).Handle.func1({0x2316950, 0xc0003a2d80}, 0xc0000f4700)
+	E:/我的菜鸡项目实战/evaluation/app/common/middleware/corsmiddleware.go:23 +0x333
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x2316950?, 0xc0003a2d80?}, 0xc00026c090?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.GunzipHandler.func1({0x2316950, 0xc0003a2d80}, 0xc0000f4700)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/gunziphandler.go:26 +0xe9
+net/http.HandlerFunc.ServeHTTP(0xedc1a30ca?, {0x2316950?, 0xc0003a2d80?}, 0x11a016755?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MaxBytesHandler.func2.1({0x2316950?, 0xc0003a2d80?}, 0x319c960?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/maxbyteshandler.go:24 +0xff
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x2316950?, 0xc0003a2d80?}, 0x0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MetricHandler.func1.1({0x2316950, 0xc0003a2d80}, 0x0?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/metrichandler.go:21 +0xd5
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x2316950?, 0xc0003a2d80?}, 0x0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1({0x2316950?, 0xc0003a2d80?}, 0x0?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:21 +0x83
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x2316950?, 0xc0003a2d80?}, 0x0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP.func1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:81 +0x7c
+created by github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:75 +0x350
+	caller=internal/log.go:57	trace=10405c4a7087aa6401500b90e7622d95	span=24d75ae4205473e2
+2023-06-13T17:41:30.920+08:00	[31;1m error [0m	[HTTP] [103;90;1m 500 [0m - [46;97;1m POST [0m /user/register - 127.0.0.1:60304 - PostmanRuntime-ApipostRuntime/1.1.0
+POST /user/register HTTP/1.1
+Host: 127.0.0.1:1001
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 28
+Content-Type: application/x-www-form-urlencoded
+User-Agent: PostmanRuntime-ApipostRuntime/1.1.0
+
+username=11111&password=2222	duration=3.6ms	caller=handler/loghandler.go:162	trace=10405c4a7087aa6401500b90e7622d95	span=24d75ae4205473e2
+2023-06-13T17:42:06.534+08:00	[31;1m error [0m	fail - etcd:/127.0.0.1:2379/user.rpc/user.User/Register - username:"11111"  password:"2222" - rpc error: code = Unknown desc = 用户名重复	duration=1.6ms	caller=clientinterceptors/durationinterceptor.go:35	trace=c03843ad017be4f2f78e15ff448372d9	span=c1f70696960bb507
+2023-06-13T17:42:06.535+08:00	[31;1m error [0m	(/user/register - 127.0.0.1:60344) runtime error: invalid memory address or nil pointer dereference
+goroutine 33 [running]:
+runtime/debug.Stack()
+	C:/Program Files/Go/src/runtime/debug/stack.go:24 +0x65
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1.1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:16 +0x66
+panic({0x17d6700, 0x2ba88c0})
+	C:/Program Files/Go/src/runtime/panic.go:884 +0x212
+rpc/app/service/user/api/internal/logic.(*RegisterLogic).Register(0xc0006bbc70, 0xc0005880e0)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/logic/registerlogic.go:35 +0xb9
+rpc/app/service/user/api/internal/handler.RegisterHandler.func1({0x1d56950, 0xc00022c8a0}, 0xc00047c500)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/handler/registerhandler.go:21 +0x1a7
+rpc/app/common/middleware.(*CORSMIDDLEWAREMiddleware).Handle.func1({0x1d56950, 0xc00022c8a0}, 0xc00047c500)
+	E:/我的菜鸡项目实战/evaluation/app/common/middleware/corsmiddleware.go:23 +0x333
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x1d56950?, 0xc00022c8a0?}, 0xc000208c60?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.GunzipHandler.func1({0x1d56950, 0xc00022c8a0}, 0xc00047c500)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/gunziphandler.go:26 +0xe9
+net/http.HandlerFunc.ServeHTTP(0xedc1a30ee?, {0x1d56950?, 0xc00022c8a0?}, 0xb9927c8d?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MaxBytesHandler.func2.1({0x1d56950?, 0xc00022c8a0?}, 0x2bdc960?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/maxbyteshandler.go:24 +0xff
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x1d56950?, 0xc00022c8a0?}, 0x0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MetricHandler.func1.1({0x1d56950, 0xc00022c8a0}, 0xc0004dbfb0?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/metrichandler.go:21 +0xd5
+net/http.HandlerFunc.ServeHTTP(0xc000134780?, {0x1d56950?, 0xc00022c8a0?}, 0xc00013a628?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1({0x1d56950?, 0xc00022c8a0?}, 0xc0004dbf98?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:21 +0x83
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x1d56950?, 0xc00022c8a0?}, 0x1a6fe5?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP.func1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:81 +0x7c
+created by github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:75 +0x350
+	caller=internal/log.go:57	trace=c03843ad017be4f2f78e15ff448372d9	span=61f1931ecae2e591
+2023-06-13T17:42:06.535+08:00	[31;1m error [0m	[HTTP] [103;90;1m 500 [0m - [46;97;1m POST [0m /user/register - 127.0.0.1:60344 - PostmanRuntime-ApipostRuntime/1.1.0
+POST /user/register HTTP/1.1
+Host: 127.0.0.1:1001
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 28
+Content-Type: application/x-www-form-urlencoded
+User-Agent: PostmanRuntime-ApipostRuntime/1.1.0
+
+username=11111&password=2222	duration=2.8ms	caller=handler/loghandler.go:162	trace=c03843ad017be4f2f78e15ff448372d9	span=61f1931ecae2e591
+2023-06-13T17:42:30.909+08:00	[31;1m error [0m	fail - etcd:/127.0.0.1:2379/user.rpc/user.User/Register - username:"11111"  password:"22222" - rpc error: code = Unknown desc = 用户名重复	duration=1.5ms	caller=clientinterceptors/durationinterceptor.go:35	trace=dc04cc9160ed70743a48ed2f2215d695	span=431da4c5dc9a81b8
+2023-06-13T17:42:30.909+08:00	[31;1m error [0m	(/user/register - 127.0.0.1:60391) runtime error: invalid memory address or nil pointer dereference
+goroutine 99 [running]:
+runtime/debug.Stack()
+	C:/Program Files/Go/src/runtime/debug/stack.go:24 +0x65
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1.1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:16 +0x66
+panic({0x17d6700, 0x2ba88c0})
+	C:/Program Files/Go/src/runtime/panic.go:884 +0x212
+rpc/app/service/user/api/internal/logic.(*RegisterLogic).Register(0xc000277c70, 0xc0005880e0)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/logic/registerlogic.go:35 +0xb9
+rpc/app/service/user/api/internal/handler.RegisterHandler.func1({0x1d56950, 0xc0003ea0c0}, 0xc00047c800)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/handler/registerhandler.go:21 +0x1a7
+rpc/app/common/middleware.(*CORSMIDDLEWAREMiddleware).Handle.func1({0x1d56950, 0xc0003ea0c0}, 0xc00047c800)
+	E:/我的菜鸡项目实战/evaluation/app/common/middleware/corsmiddleware.go:23 +0x333
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x1d56950?, 0xc0003ea0c0?}, 0xc000208e70?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.GunzipHandler.func1({0x1d56950, 0xc0003ea0c0}, 0xc00047c800)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/gunziphandler.go:26 +0xe9
+net/http.HandlerFunc.ServeHTTP(0xedc1a3106?, {0x1d56950?, 0xc0003ea0c0?}, 0x66673280d?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MaxBytesHandler.func2.1({0x1d56950?, 0xc0003ea0c0?}, 0x2bdc960?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/maxbyteshandler.go:24 +0xff
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x1d56950?, 0xc0003ea0c0?}, 0x0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MetricHandler.func1.1({0x1d56950, 0xc0003ea0c0}, 0xc0004dbfb0?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/metrichandler.go:21 +0xd5
+net/http.HandlerFunc.ServeHTTP(0xc000134780?, {0x1d56950?, 0xc0003ea0c0?}, 0xc00013a628?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1({0x1d56950?, 0xc0003ea0c0?}, 0xc0004dbf98?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:21 +0x83
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x1d56950?, 0xc0003ea0c0?}, 0x1a6fe5?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP.func1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:81 +0x7c
+created by github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:75 +0x350
+	caller=internal/log.go:57	trace=dc04cc9160ed70743a48ed2f2215d695	span=f9fca6165c2015d9
+2023-06-13T17:42:30.909+08:00	[31;1m error [0m	[HTTP] [103;90;1m 500 [0m - [46;97;1m POST [0m /user/register - 127.0.0.1:60391 - PostmanRuntime-ApipostRuntime/1.1.0
+POST /user/register HTTP/1.1
+Host: 127.0.0.1:1001
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 29
+Content-Type: application/x-www-form-urlencoded
+User-Agent: PostmanRuntime-ApipostRuntime/1.1.0
+
+username=11111&password=22222	duration=2.0ms	caller=handler/loghandler.go:162	trace=dc04cc9160ed70743a48ed2f2215d695	span=f9fca6165c2015d9
+2023-06-13T17:51:43.030+08:00	[31;1m error [0m	fail - etcd:/127.0.0.1:2379/user.rpc/user.User/Login - username:"11111"  password:"2222" - rpc error: code = Unknown desc = 密码错误	duration=1.6ms	caller=clientinterceptors/durationinterceptor.go:35	trace=b62e40a77136eb033eb609a63da936c1	span=934781ffcd0bc87b
+2023-06-13T17:54:31.641+08:00	[31;1m error [0m	fail - etcd:/127.0.0.1:2379/user.rpc/user.User/Login - username:"11111"  password:"2222" - rpc error: code = Unknown desc = 密码错误	duration=1.2ms	caller=clientinterceptors/durationinterceptor.go:35	trace=16fe6793b98640fda8ef98444ecc8634	span=d240a4cf71bfcfd0
+2023-06-13T17:55:07.296+08:00	[31;1m error [0m	fail - etcd:/127.0.0.1:2379/user.rpc/user.User/Login - username:"11111"  password:"2222" - rpc error: code = Unknown desc = 密码错误	duration=2.5ms	caller=clientinterceptors/durationinterceptor.go:35	trace=460bb3957e12b9c6b441c58621c37a1e	span=cf67123b56d40c01
+2023-06-13T17:55:18.759+08:00	[31;1m error [0m	fail - etcd:/127.0.0.1:2379/user.rpc/user.User/Register - username:"11111"  password:"2222" - rpc error: code = Unknown desc = 用户名重复	duration=1.9ms	caller=clientinterceptors/durationinterceptor.go:35	trace=92156e3980da62aa3e219e28f549c1b1	span=7890ab0d51300bcd
+2023-06-13T17:55:18.759+08:00	[31;1m error [0m	(/user/register - 127.0.0.1:61585) runtime error: invalid memory address or nil pointer dereference
+goroutine 42 [running]:
+runtime/debug.Stack()
+	C:/Program Files/Go/src/runtime/debug/stack.go:24 +0x65
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1.1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:16 +0x66
+panic({0x24e6700, 0x38b88c0})
+	C:/Program Files/Go/src/runtime/panic.go:884 +0x212
+rpc/app/service/user/api/internal/logic.(*RegisterLogic).Register(0xc0003a7c70, 0xc0002eaba0)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/logic/registerlogic.go:35 +0xc9
+rpc/app/service/user/api/internal/handler.RegisterHandler.func1({0x2a66970, 0xc000293d40}, 0xc0003e0a00)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/handler/registerhandler.go:21 +0x1a7
+rpc/app/common/middleware.(*CORSMIDDLEWAREMiddleware).Handle.func1({0x2a66970, 0xc000293d40}, 0xc0003e0a00)
+	E:/我的菜鸡项目实战/evaluation/app/common/middleware/corsmiddleware.go:23 +0x333
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x2a66970?, 0xc000293d40?}, 0xc0003b9ec0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.GunzipHandler.func1({0x2a66970, 0xc000293d40}, 0xc0003e0a00)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/gunziphandler.go:26 +0xe9
+net/http.HandlerFunc.ServeHTTP(0xedc1a3406?, {0x2a66970?, 0xc000293d40?}, 0x42d2b8245?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MaxBytesHandler.func2.1({0x2a66970?, 0xc000293d40?}, 0x38ec960?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/maxbyteshandler.go:24 +0xff
+net/http.HandlerFunc.ServeHTTP(0x1eeab121115?, {0x2a66970?, 0xc000293d40?}, 0x250fb60?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MetricHandler.func1.1({0x2a66970, 0xc000293d40}, 0x2a58da0?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/metrichandler.go:21 +0xd5
+net/http.HandlerFunc.ServeHTTP(0xc0003ba9c0?, {0x2a66970?, 0xc000293d40?}, 0x0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1({0x2a66970?, 0xc000293d40?}, 0xc000361f50?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:21 +0x83
+net/http.HandlerFunc.ServeHTTP(0x13b7fe5?, {0x2a66970?, 0xc000293d40?}, 0xc0003be8c0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP.func1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:81 +0x7c
+created by github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:75 +0x350
+	caller=internal/log.go:57	trace=92156e3980da62aa3e219e28f549c1b1	span=e811302be31d62bd
+2023-06-13T17:55:18.759+08:00	[31;1m error [0m	[HTTP] [103;90;1m 500 [0m - [46;97;1m POST [0m /user/register - 127.0.0.1:61585 - PostmanRuntime-ApipostRuntime/1.1.0
+POST /user/register HTTP/1.1
+Host: 127.0.0.1:1001
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 28
+Content-Type: application/x-www-form-urlencoded
+User-Agent: PostmanRuntime-ApipostRuntime/1.1.0
+
+username=11111&password=2222	duration=2.5ms	caller=handler/loghandler.go:162	trace=92156e3980da62aa3e219e28f549c1b1	span=e811302be31d62bd
+2023-06-13T18:26:14.350+08:00	[31;1m error [0m	fail - etcd:/127.0.0.1:2379/user.rpc/user.User/Register - username:"11111"  password:"2222" - rpc error: code = Unknown desc = 用户名重复	duration=23.8ms	caller=clientinterceptors/durationinterceptor.go:35	trace=d156d696f99284e728bbf03c363c9d19	span=23fabfacb3ae3046
+2023-06-13T18:26:14.351+08:00	[31;1m error [0m	(/user/register - 127.0.0.1:62434) runtime error: invalid memory address or nil pointer dereference
+goroutine 99 [running]:
+runtime/debug.Stack()
+	C:/Program Files/Go/src/runtime/debug/stack.go:24 +0x65
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1.1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:16 +0x66
+panic({0x1c26700, 0x2ff88c0})
+	C:/Program Files/Go/src/runtime/panic.go:884 +0x212
+rpc/app/service/user/api/internal/logic.(*RegisterLogic).Register(0xc0006c3c70, 0xc00009b6e0)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/logic/registerlogic.go:35 +0xc9
+rpc/app/service/user/api/internal/handler.RegisterHandler.func1({0x21a6970, 0xc0000d60c0}, 0xc000323100)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/handler/registerhandler.go:21 +0x1a7
+rpc/app/common/middleware.(*CORSMIDDLEWAREMiddleware).Handle.func1({0x21a6970, 0xc0000d60c0}, 0xc000323100)
+	E:/我的菜鸡项目实战/evaluation/app/common/middleware/corsmiddleware.go:23 +0x333
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x21a6970?, 0xc0000d60c0?}, 0xc000653e60?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.GunzipHandler.func1({0x21a6970, 0xc0000d60c0}, 0xc000323100)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/gunziphandler.go:26 +0xe9
+net/http.HandlerFunc.ServeHTTP(0xedc1a3b46?, {0x21a6970?, 0xc0000d60c0?}, 0x53b373199?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MaxBytesHandler.func2.1({0x21a6970?, 0xc0000d60c0?}, 0x302c960?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/maxbyteshandler.go:24 +0xff
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x21a6970?, 0xc0000d60c0?}, 0x0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MetricHandler.func1.1({0x21a6970, 0xc0000d60c0}, 0xc000675fb0?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/metrichandler.go:21 +0xd5
+net/http.HandlerFunc.ServeHTTP(0xc0000e40c0?, {0x21a6970?, 0xc0000d60c0?}, 0xc0001262e8?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1({0x21a6970?, 0xc0000d60c0?}, 0xc000675f98?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:21 +0x83
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x21a6970?, 0xc0000d60c0?}, 0x5f6fe5?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP.func1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:81 +0x7c
+created by github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:75 +0x350
+	caller=internal/log.go:57	trace=d156d696f99284e728bbf03c363c9d19	span=311e71d728c1af12
+2023-06-13T18:26:14.351+08:00	[31;1m error [0m	[HTTP] [103;90;1m 500 [0m - [46;97;1m POST [0m /user/register - 127.0.0.1:62434 - PostmanRuntime-ApipostRuntime/1.1.0
+POST /user/register HTTP/1.1
+Host: 127.0.0.1:1001
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 28
+Content-Type: application/x-www-form-urlencoded
+User-Agent: PostmanRuntime-ApipostRuntime/1.1.0
+
+username=11111&password=2222	duration=25.4ms	caller=handler/loghandler.go:162	trace=d156d696f99284e728bbf03c363c9d19	span=311e71d728c1af12
+2023-06-13T18:26:19.311+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
+2023-06-13T18:27:40.665+08:00	[31;1m error [0m	fail - etcd:/127.0.0.1:2379/user.rpc/user.User/Register - username:"11111"  password:"2222" - rpc error: code = Unknown desc = 用户名重复	duration=2.8ms	caller=clientinterceptors/durationinterceptor.go:35	trace=67e88304f164a688782c4167b78c8deb	span=b84af93ae23ba86f
+2023-06-13T18:27:40.666+08:00	[31;1m error [0m	(/user/register - 127.0.0.1:62597) runtime error: invalid memory address or nil pointer dereference
+goroutine 74 [running]:
+runtime/debug.Stack()
+	C:/Program Files/Go/src/runtime/debug/stack.go:24 +0x65
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1.1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:16 +0x66
+panic({0x17a6700, 0x2b788c0})
+	C:/Program Files/Go/src/runtime/panic.go:884 +0x212
+rpc/app/service/user/api/internal/logic.(*RegisterLogic).Register(0xc000517c70, 0xc00055e920)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/logic/registerlogic.go:35 +0x106
+rpc/app/service/user/api/internal/handler.RegisterHandler.func1({0x1d26970, 0xc0007414a0}, 0xc000418a00)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/handler/registerhandler.go:21 +0x1a7
+rpc/app/common/middleware.(*CORSMIDDLEWAREMiddleware).Handle.func1({0x1d26970, 0xc0007414a0}, 0xc000418a00)
+	E:/我的菜鸡项目实战/evaluation/app/common/middleware/corsmiddleware.go:23 +0x333
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x1d26970?, 0xc0007414a0?}, 0xc0003d2390?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.GunzipHandler.func1({0x1d26970, 0xc0007414a0}, 0xc000418a00)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/gunziphandler.go:26 +0xe9
+net/http.HandlerFunc.ServeHTTP(0xedc1a3b9c?, {0x1d26970?, 0xc0007414a0?}, 0xfc5652b5?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MaxBytesHandler.func2.1({0x1d26970?, 0xc0007414a0?}, 0x2bac960?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/maxbyteshandler.go:24 +0xff
+net/http.HandlerFunc.ServeHTTP(0x10000000000?, {0x1d26970?, 0xc0007414a0?}, 0x136d09a17d8?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MetricHandler.func1.1({0x1d26970, 0xc0007414a0}, 0x19db700?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/metrichandler.go:21 +0xd5
+net/http.HandlerFunc.ServeHTTP(0xc0004b1fa8?, {0x1d26970?, 0xc0007414a0?}, 0x0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1({0x1d26970?, 0xc0007414a0?}, 0x0?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:21 +0x83
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x1d26970?, 0xc0007414a0?}, 0x0?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP.func1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:81 +0x7c
+created by github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:75 +0x350
+	caller=internal/log.go:57	trace=67e88304f164a688782c4167b78c8deb	span=d7d4bedba46ba433
+2023-06-13T18:27:40.666+08:00	[31;1m error [0m	[HTTP] [103;90;1m 500 [0m - [46;97;1m POST [0m /user/register - 127.0.0.1:62597 - PostmanRuntime-ApipostRuntime/1.1.0
+POST /user/register HTTP/1.1
+Host: 127.0.0.1:1001
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 28
+Content-Type: application/x-www-form-urlencoded
+User-Agent: PostmanRuntime-ApipostRuntime/1.1.0
+
+username=11111&password=2222	duration=4.5ms	caller=handler/loghandler.go:162	trace=67e88304f164a688782c4167b78c8deb	span=d7d4bedba46ba433
+2023-06-13T18:27:43.847+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
+2023-06-13T18:29:10.363+08:00	[31;1m error [0m	fail - etcd:/127.0.0.1:2379/user.rpc/user.User/Register - username:"11111" password:"2222" - rpc error: code = Unknown desc = 用户名重复	duration=1.7ms	caller=clientinterceptors/durationinterceptor.go:35	trace=134686101e977993e5dc6a356360bd6d	span=0a46b6893a327e38
+2023-06-13T18:29:10.363+08:00	[31;1m error [0m	(/user/register - 127.0.0.1:62779) runtime error: invalid memory address or nil pointer dereference
+goroutine 84 [running]:
+runtime/debug.Stack()
+	C:/Program Files/Go/src/runtime/debug/stack.go:24 +0x65
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1.1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:16 +0x66
+panic({0x1df6700, 0x31c88c0})
+	C:/Program Files/Go/src/runtime/panic.go:884 +0x212
+rpc/app/service/user/api/internal/logic.(*RegisterLogic).Register(0xc000565c70, 0xc0005d6a40)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/logic/registerlogic.go:35 +0x106
+rpc/app/service/user/api/internal/handler.RegisterHandler.func1({0x2376970, 0xc0000a9a40}, 0xc0004a0900)
+	E:/我的菜鸡项目实战/evaluation/app/service/user/api/internal/handler/registerhandler.go:21 +0x1a7
+rpc/app/common/middleware.(*CORSMIDDLEWAREMiddleware).Handle.func1({0x2376970, 0xc0000a9a40}, 0xc0004a0900)
+	E:/我的菜鸡项目实战/evaluation/app/common/middleware/corsmiddleware.go:23 +0x333
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x2376970?, 0xc0000a9a40?}, 0x78e21f?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.GunzipHandler.func1({0x2376970, 0xc0000a9a40}, 0xc0004a0900)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/gunziphandler.go:26 +0xe9
+net/http.HandlerFunc.ServeHTTP(0xedc1a3bf6?, {0x2376970?, 0xc0000a9a40?}, 0x1a3924485?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MaxBytesHandler.func2.1({0x2376970?, 0xc0000a9a40?}, 0x31fc960?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/maxbyteshandler.go:24 +0xff
+net/http.HandlerFunc.ServeHTTP(0xc000549e78?, {0x2376970?, 0xc0000a9a40?}, 0xc000549ed8?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.MetricHandler.func1.1({0x2376970, 0xc0000a9a40}, 0xc0006947d0?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/metrichandler.go:21 +0xd5
+net/http.HandlerFunc.ServeHTTP(0xc89d80?, {0x2376970?, 0xc0000a9a40?}, 0xc000549f30?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.RecoverHandler.func1({0x2376970?, 0xc0000a9a40?}, 0x0?)
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/recoverhandler.go:21 +0x83
+net/http.HandlerFunc.ServeHTTP(0x0?, {0x2376970?, 0xc0000a9a40?}, 0x7c6fe5?)
+	C:/Program Files/Go/src/net/http/server.go:2109 +0x2f
+github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP.func1()
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:81 +0x7c
+created by github.com/zeromicro/go-zero/rest/handler.(*timeoutHandler).ServeHTTP
+	D:/goproject/pkg/mod/github.com/zeromicro/go-zero@v1.5.3/rest/handler/timeouthandler.go:75 +0x350
+	caller=internal/log.go:57	trace=134686101e977993e5dc6a356360bd6d	span=a115cd3465327c52
+2023-06-13T18:29:10.363+08:00	[31;1m error [0m	[HTTP] [103;90;1m 500 [0m - [46;97;1m POST [0m /user/register - 127.0.0.1:62779 - PostmanRuntime-ApipostRuntime/1.1.0
+POST /user/register HTTP/1.1
+Host: 127.0.0.1:1001
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 28
+Content-Type: application/x-www-form-urlencoded
+User-Agent: PostmanRuntime-ApipostRuntime/1.1.0
+
+username=11111&password=2222	duration=2.7ms	caller=handler/loghandler.go:162	trace=134686101e977993e5dc6a356360bd6d	span=a115cd3465327c52
+2023-06-13T18:29:15.712+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
+2023-06-13T18:36:36.452+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
+2023-06-13T18:36:41.460+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
+2023-06-13T18:36:46.465+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
+2023-06-13T18:36:51.481+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
+2023-06-13T18:37:21.532+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
+2023-06-13T18:37:31.527+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
+2023-06-13T18:37:56.602+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
+2023-06-13T18:38:26.647+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
+2023-06-13T18:38:31.638+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
+2023-06-13T18:41:26.952+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
+2023-06-13T18:41:56.990+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
+2023-06-13T18:42:07.007+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
+2023-06-13T22:54:36.908+08:00	[31;1m error [0m	bad resolver state	caller=internal/discovbuilder.go:34
+2023-06-13T22:55:32.653+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
+2023-06-13T23:26:35.519+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135

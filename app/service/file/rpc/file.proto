@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package file;
+
+option go_package = "./pb";
+
+message GetFileReq{
+  int32 level = 1;
+  int32 year = 2;
+  int32 month = 3;
+  int32 set = 4;
+}
+
+message File{
+  int32 level = 1;
+  int32 year = 2;
+  int32 month = 3;
+  int32 set = 4;
+  string update_time=5;
+}
+
+message GetFileResp{
+  int32 status_code = 1;
+  string status_msg = 2;
+  repeated File data=3;
+}
+
+message UploadReq{
+  int32 level = 1;
+  int32 year = 2;
+  int32 month = 3;
+  int32 set = 4;
+}
+
+message UploadResp{
+  int32 status_code = 1;
+  string status_msg = 2;
+}
+
+message DownloadReq{
+  int32 type = 1;
+  int64 id = 2;
+}
+message DownloadResp{
+  int32 status_code = 1;
+  string status_msg = 2;
+}
+service file {
+  rpc Upload(UploadReq)returns(UploadResp);
+  rpc Download(DownloadReq) returns(DownloadResp);
+  rpc GetFiles(GetFileReq)returns(GetFileResp);
+}
