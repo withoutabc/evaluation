@@ -18,13 +18,14 @@ message CountJobResp{
   string job_name = 3;
 }
 
-message JoinJobReq{
-  int32 begin = 1;
-  int32 end = 2;
-  int32 level = 3;
+message JoinDataReq{
+  int32 level = 1;
+  int32 year = 2;
+  int32 month = 3;
+  int32 set = 4;
 }
 
-message JoinJobResp{
+message JoinDataResp{
   int32 status_code = 1;
   string status_msg = 2;
   string job_name = 3;
@@ -74,7 +75,7 @@ message ViewWordResp{
 
 service job {
   rpc CountJob(CountJobReq)returns(CountJobResp);
-  rpc JoinJob(JoinJobReq)returns(JoinJobResp);
+  rpc JoinData(JoinDataReq)returns(JoinDataResp);
   rpc ViewJobs(ViewJobsReq)returns(ViewJobsResp);
   rpc ViewWord(ViewWordReq)returns(ViewWordResp);
 }

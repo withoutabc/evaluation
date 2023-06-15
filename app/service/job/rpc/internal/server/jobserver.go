@@ -27,9 +27,9 @@ func (s *JobServer) CountJob(ctx context.Context, in *pb.CountJobReq) (*pb.Count
 	return l.CountJob(in)
 }
 
-func (s *JobServer) JoinJob(ctx context.Context, in *pb.JoinJobReq) (*pb.JoinJobResp, error) {
-	l := logic.NewJoinJobLogic(ctx, s.svcCtx)
-	return l.JoinJob(in)
+func (s *JobServer) JoinData(ctx context.Context, in *pb.JoinDataReq) (*pb.JoinDataResp, error) {
+	l := logic.NewJoinDataLogic(ctx, s.svcCtx)
+	return l.JoinData(in)
 }
 
 func (s *JobServer) ViewJobs(ctx context.Context, in *pb.ViewJobsReq) (*pb.ViewJobsResp, error) {

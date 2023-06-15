@@ -16,15 +16,15 @@ type (
 )
 
 type (
-	JoinJobReq {
+	JoinDataReq {
 		Level int32 `form:"level"`
-		Begin int32 `form:"begin"`
-		End   int32 `form:"end"`
+		Year  int32 `form:"year"`
+		Month int32 `form:"month"`
+		Set   int32 `form:"set"`
 	}
-	JoinJobResp {
-		Status  int32  `json:"status"`
-		Msg     string `json:"msg"`
-		JobName string `json:"job_name"`
+	JoinDataResp {
+		Status int32  `json:"status"`
+		Msg    string `json:"msg"`
 	}
 )
 
@@ -64,7 +64,7 @@ service job {
 	post /submit/job (CountJobReq) returns (CountJobResp)
 	@doc "提交计数任务"
 	@handler JoinJob
-	post /join/job (JoinJobReq) returns (JoinJobResp)
+	post /join/job (JoinDataReq) returns (JoinDataResp)
 	@doc "查看作业情况"
 	@handler ViewJob
 	get /view/job/:id (ViewJobsReq) returns (ViewJobsResp)

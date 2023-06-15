@@ -15,10 +15,10 @@ import (
 
 type (
 	Model interface {
-		WordCount(jobName, inputPath, outputPath string) int32
+		WordCount(jobName, inputPath, outputPath string) int32 //1
 		JoinWord(jobName, outputPath string, inputPath []string) int32
 		JobList(Id string) ([]*pb.Jobs, int32)
-		JoinData(jobName string) int32
+		JoinData(jobName string) int32 //对应1
 	}
 	DefaultModel struct {
 		Ssh *ssh.Client
@@ -51,6 +51,7 @@ func (d *DefaultModel) WordCount(jobName, inputPath, outputPath string) int32 {
 }
 
 func (d *DefaultModel) JoinData(jobName string) int32 {
+
 	return errs.No
 }
 

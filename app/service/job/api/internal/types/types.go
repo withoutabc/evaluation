@@ -14,16 +14,16 @@ type CountJobResp struct {
 	JobName string `json:"job_name"`
 }
 
-type JoinJobReq struct {
+type JoinDataReq struct {
 	Level int32 `form:"level"`
-	Begin int32 `form:"begin"`
-	End   int32 `form:"end"`
+	Year  int32 `form:"year"`
+	Month int32 `form:"month"`
+	Set   int32 `form:"set"`
 }
 
-type JoinJobResp struct {
-	Status  int32  `json:"status"`
-	Msg     string `json:"msg"`
-	JobName string `json:"job_name"`
+type JoinDataResp struct {
+	Status int32  `json:"status"`
+	Msg    string `json:"msg"`
 }
 
 type ViewJobsReq struct {

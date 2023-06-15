@@ -4,21 +4,21 @@ import (
 	"net/http"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"rpc/app/service/job/api/internal/logic"
-	"rpc/app/service/job/api/internal/svc"
-	"rpc/app/service/job/api/internal/types"
+	"rpc/app/service/file/api/internal/logic"
+	"rpc/app/service/file/api/internal/svc"
+	"rpc/app/service/file/api/internal/types"
 )
 
-func JoinJobHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func DeleteFileHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.JoinJobReq
+		var req types.RemoveFileReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := logic.NewJoinJobLogic(r.Context(), svcCtx)
-		resp, err := l.JoinJob(&req)
+		l := logic.NewDeleteFileLogic(r.Context(), svcCtx)
+		resp, err := l.DeleteFile(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

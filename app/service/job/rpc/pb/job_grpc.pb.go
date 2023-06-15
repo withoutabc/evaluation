@@ -20,7 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 
 const (
 	Job_CountJob_FullMethodName = "/file.job/CountJob"
-	Job_JoinJob_FullMethodName  = "/file.job/JoinJob"
+	Job_JoinData_FullMethodName = "/file.job/JoinData"
 	Job_ViewJobs_FullMethodName = "/file.job/ViewJobs"
 	Job_ViewWord_FullMethodName = "/file.job/ViewWord"
 )
@@ -30,7 +30,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type JobClient interface {
 	CountJob(ctx context.Context, in *CountJobReq, opts ...grpc.CallOption) (*CountJobResp, error)
-	JoinJob(ctx context.Context, in *JoinJobReq, opts ...grpc.CallOption) (*JoinJobResp, error)
+	JoinData(ctx context.Context, in *JoinDataReq, opts ...grpc.CallOption) (*JoinDataResp, error)
 	ViewJobs(ctx context.Context, in *ViewJobsReq, opts ...grpc.CallOption) (*ViewJobsResp, error)
 	ViewWord(ctx context.Context, in *ViewWordReq, opts ...grpc.CallOption) (*ViewWordResp, error)
 }
@@ -52,9 +52,9 @@ func (c *jobClient) CountJob(ctx context.Context, in *CountJobReq, opts ...grpc.
 	return out, nil
 }
 
-func (c *jobClient) JoinJob(ctx context.Context, in *JoinJobReq, opts ...grpc.CallOption) (*JoinJobResp, error) {
-	out := new(JoinJobResp)
-	err := c.cc.Invoke(ctx, Job_JoinJob_FullMethodName, in, out, opts...)
+func (c *jobClient) JoinData(ctx context.Context, in *JoinDataReq, opts ...grpc.CallOption) (*JoinDataResp, error) {
+	out := new(JoinDataResp)
+	err := c.cc.Invoke(ctx, Job_JoinData_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ func (c *jobClient) ViewWord(ctx context.Context, in *ViewWordReq, opts ...grpc.
 // for forward compatibility
 type JobServer interface {
 	CountJob(context.Context, *CountJobReq) (*CountJobResp, error)
-	JoinJob(context.Context, *JoinJobReq) (*JoinJobResp, error)
+	JoinData(context.Context, *JoinDataReq) (*JoinDataResp, error)
 	ViewJobs(context.Context, *ViewJobsReq) (*ViewJobsResp, error)
 	ViewWord(context.Context, *ViewWordReq) (*ViewWordResp, error)
 	mustEmbedUnimplementedJobServer()
@@ -97,8 +97,8 @@ type UnimplementedJobServer struct {
 func (UnimplementedJobServer) CountJob(context.Context, *CountJobReq) (*CountJobResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CountJob not implemented")
 }
-func (UnimplementedJobServer) JoinJob(context.Context, *JoinJobReq) (*JoinJobResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method JoinJob not implemented")
+func (UnimplementedJobServer) JoinData(context.Context, *JoinDataReq) (*JoinDataResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method JoinData not implemented")
 }
 func (UnimplementedJobServer) ViewJobs(context.Context, *ViewJobsReq) (*ViewJobsResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ViewJobs not implemented")
@@ -137,20 +137,20 @@ func _Job_CountJob_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Job_JoinJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(JoinJobReq)
+func _Job_JoinData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(JoinDataReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(JobServer).JoinJob(ctx, in)
+		return srv.(JobServer).JoinData(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Job_JoinJob_FullMethodName,
+		FullMethod: Job_JoinData_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobServer).JoinJob(ctx, req.(*JoinJobReq))
+		return srv.(JobServer).JoinData(ctx, req.(*JoinDataReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -203,8 +203,8 @@ var Job_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Job_CountJob_Handler,
 		},
 		{
-			MethodName: "JoinJob",
-			Handler:    _Job_JoinJob_Handler,
+			MethodName: "JoinData",
+			Handler:    _Job_JoinData_Handler,
 		},
 		{
 			MethodName: "ViewJobs",
