@@ -45,10 +45,21 @@ message DownloadReq{
 message DownloadResp{
   int32 status_code = 1;
   string status_msg = 2;
-
 }
+
+message RemoveFileReq{
+  int64 id=1;
+}
+
+message RemoveFileResp{
+  int32 status_code = 1;
+  string status_msg = 2;
+    File file=3;
+}
+
 service file {
   rpc Upload(UploadReq)returns(UploadResp);
   rpc Download(DownloadReq) returns(DownloadResp);
   rpc GetFiles(GetFileReq)returns(GetFileResp);
+  rpc RemoveFile(RemoveFileReq)returns(RemoveFileResp);
 }

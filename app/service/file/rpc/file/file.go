@@ -13,18 +13,21 @@ import (
 )
 
 type (
-	DownloadReq  = pb.DownloadReq
-	DownloadResp = pb.DownloadResp
-	File         = pb.File
-	GetFileReq   = pb.GetFileReq
-	GetFileResp  = pb.GetFileResp
-	UploadReq    = pb.UploadReq
-	UploadResp   = pb.UploadResp
+	DownloadReq    = pb.DownloadReq
+	DownloadResp   = pb.DownloadResp
+	File           = pb.File
+	GetFileReq     = pb.GetFileReq
+	GetFileResp    = pb.GetFileResp
+	RemoveFileReq  = pb.RemoveFileReq
+	RemoveFileResp = pb.RemoveFileResp
+	UploadReq      = pb.UploadReq
+	UploadResp     = pb.UploadResp
 
 	FileZrpcClient interface {
 		Upload(ctx context.Context, in *UploadReq, opts ...grpc.CallOption) (*UploadResp, error)
 		Download(ctx context.Context, in *DownloadReq, opts ...grpc.CallOption) (*DownloadResp, error)
 		GetFiles(ctx context.Context, in *GetFileReq, opts ...grpc.CallOption) (*GetFileResp, error)
+		RemoveFile(ctx context.Context, in *RemoveFileReq, opts ...grpc.CallOption) (*RemoveFileResp, error)
 	}
 
 	defaultFileZrpcClient struct {
@@ -51,4 +54,9 @@ func (m *defaultFileZrpcClient) Download(ctx context.Context, in *DownloadReq, o
 func (m *defaultFileZrpcClient) GetFiles(ctx context.Context, in *GetFileReq, opts ...grpc.CallOption) (*GetFileResp, error) {
 	client := pb.NewFileClient(m.cli.Conn())
 	return client.GetFiles(ctx, in, opts...)
+}
+
+func (m *defaultFileZrpcClient) RemoveFile(ctx context.Context, in *RemoveFileReq, opts ...grpc.CallOption) (*RemoveFileResp, error) {
+	client := pb.NewFileClient(m.cli.Conn())
+	return client.RemoveFile(ctx, in, opts...)
 }

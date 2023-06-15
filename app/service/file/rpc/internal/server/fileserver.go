@@ -36,3 +36,8 @@ func (s *FileServer) GetFiles(ctx context.Context, in *pb.GetFileReq) (*pb.GetFi
 	l := logic.NewGetFilesLogic(ctx, s.svcCtx)
 	return l.GetFiles(in)
 }
+
+func (s *FileServer) RemoveFile(ctx context.Context, in *pb.RemoveFileReq) (*pb.RemoveFileResp, error) {
+	l := logic.NewRemoveFileLogic(ctx, s.svcCtx)
+	return l.RemoveFile(in)
+}

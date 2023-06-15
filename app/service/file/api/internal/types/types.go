@@ -39,3 +39,12 @@ type GetFileListResp struct {
 	Msg    string      `json:"msg"`
 	List   interface{} `json:"list,omitempty"`
 }
+
+type RemoveFileReq struct {
+	Id int64 `form:"id"`
+}
+
+type RemoveFileResp struct {
+	Status int32  `json:"status"`
+	Msg    string `json:"msg"`
+}

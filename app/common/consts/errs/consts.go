@@ -19,6 +19,7 @@ const (
 
 	FileIsExist  //上传时文件已经存在
 	FileNotExist //下载时文件不存在
+	FileDelete
 	ResultNotExist
 
 	RepeatedUsername //用户名重复
@@ -45,6 +46,7 @@ var (
 
 	FileIsExistErr    = errors.New("上传时文件已存在")
 	FileNotExistErr   = errors.New("下载时文件不存在")
+	FileDeleteErr     = errors.New("文件已删除")
 	ResultNotExistErr = errors.New("结果文件不存在")
 
 	RepeatedUsernameErr = errors.New("用户名重复")
@@ -69,6 +71,7 @@ var ErrorsMap = map[int32]error{
 
 	FileIsExist:    FileIsExistErr,
 	FileNotExist:   FileNotExistErr,
+	FileDelete:     FileDeleteErr,
 	ResultNotExist: ResultNotExistErr,
 
 	RepeatedUsername: RepeatedUsernameErr,

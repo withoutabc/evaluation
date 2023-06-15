@@ -9,8 +9,8 @@ import (
 )
 
 func main() {
-	// 创建正则表达式，用于匹配标点、汉字、特殊符号和's'
-	reg, err := regexp.Compile("[\\p{Han}]|[^a-zA-Z0-9\\s']+|'s")
+	// 创建正则表达式，用于匹配标点、汉字、特殊符号和's'\单个字符，数字
+	reg, err := regexp.Compile("[\\p{Han}]|[^a-zA-Z0-9\\s']+|([a-zA-Z]'s)|([0-9]+)|([a-zA-Z]{1})")
 	if err != nil {
 		fmt.Println("正则表达式创建失败：", err)
 		return

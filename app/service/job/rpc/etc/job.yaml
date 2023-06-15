@@ -10,6 +10,10 @@ Ssh:
   User: root
   Password: 224488
 
+Hdfs:
+  Addr: 192.168.10.102:8020
+  User: root
+
 Log:
   ServiceName: user
   Mode: file

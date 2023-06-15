@@ -19,9 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	File_Upload_FullMethodName   = "/file.file/Upload"
-	File_Download_FullMethodName = "/file.file/Download"
-	File_GetFiles_FullMethodName = "/file.file/GetFiles"
+	File_Upload_FullMethodName     = "/file.file/Upload"
+	File_Download_FullMethodName   = "/file.file/Download"
+	File_GetFiles_FullMethodName   = "/file.file/GetFiles"
+	File_RemoveFile_FullMethodName = "/file.file/RemoveFile"
 )
 
 // FileClient is the client API for File service.
@@ -31,6 +32,7 @@ type FileClient interface {
 	Upload(ctx context.Context, in *UploadReq, opts ...grpc.CallOption) (*UploadResp, error)
 	Download(ctx context.Context, in *DownloadReq, opts ...grpc.CallOption) (*DownloadResp, error)
 	GetFiles(ctx context.Context, in *GetFileReq, opts ...grpc.CallOption) (*GetFileResp, error)
+	RemoveFile(ctx context.Context, in *RemoveFileReq, opts ...grpc.CallOption) (*RemoveFileResp, error)
 }
 
 type fileClient struct {
@@ -68,6 +70,15 @@ func (c *fileClient) GetFiles(ctx context.Context, in *GetFileReq, opts ...grpc.
 	return out, nil
 }
 
+func (c *fileClient) RemoveFile(ctx context.Context, in *RemoveFileReq, opts ...grpc.CallOption) (*RemoveFileResp, error) {
+	out := new(RemoveFileResp)
+	err := c.cc.Invoke(ctx, File_RemoveFile_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FileServer is the server API for File service.
 // All implementations must embed UnimplementedFileServer
 // for forward compatibility
@@ -75,6 +86,7 @@ type FileServer interface {
 	Upload(context.Context, *UploadReq) (*UploadResp, error)
 	Download(context.Context, *DownloadReq) (*DownloadResp, error)
 	GetFiles(context.Context, *GetFileReq) (*GetFileResp, error)
+	RemoveFile(context.Context, *RemoveFileReq) (*RemoveFileResp, error)
 	mustEmbedUnimplementedFileServer()
 }
 
@@ -90,6 +102,9 @@ func (UnimplementedFileServer) Download(context.Context, *DownloadReq) (*Downloa
 }
 func (UnimplementedFileServer) GetFiles(context.Context, *GetFileReq) (*GetFileResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFiles not implemented")
+}
+func (UnimplementedFileServer) RemoveFile(context.Context, *RemoveFileReq) (*RemoveFileResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveFile not implemented")
 }
 func (UnimplementedFileServer) mustEmbedUnimplementedFileServer() {}
 
@@ -158,6 +173,24 @@ func _File_GetFiles_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _File_RemoveFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveFileReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FileServer).RemoveFile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: File_RemoveFile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FileServer).RemoveFile(ctx, req.(*RemoveFileReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // File_ServiceDesc is the grpc.ServiceDesc for File service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -176,6 +209,10 @@ var File_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetFiles",
 			Handler:    _File_GetFiles_Handler,
+		},
+		{
+			MethodName: "RemoveFile",
+			Handler:    _File_RemoveFile_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

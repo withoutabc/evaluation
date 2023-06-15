@@ -7,6 +7,7 @@ import (
 	"log"
 	"rpc/app/common/consts/errs"
 	"rpc/app/service/file/rpc/internal/model/dao/table"
+	"rpc/app/service/file/rpc/pb"
 )
 
 type (
@@ -14,12 +15,39 @@ type (
 		Upload(ctx context.Context, level, year, month, set int32) int32
 		Download(ctx context.Context, id int64, downloadType int32) int32
 		GetFileList(ctx context.Context, level, year, month, set int32) ([]table.File, int32)
+		DeleteFile(ctx context.Context, id int64) (*pb.File, int32)
 	}
 	DefaultModel struct {
 		db  *gorm.DB
 		rdb *redis.Client
 	}
 )
+
+func (d *DefaultModel) DeleteFile(ctx context.Context, id int64) (*pb.File, int32) {
+	//查找
+	var file pb.File
+	result := d.db.WithContext(ctx).Model(&table.File{}).Where(&table.File{
+		ID: id,
+	}).First(&file)
+	if err := result.Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return nil, errs.NoRecord
+		}
+		return nil, errs.InternalServer
+	}
+	//删除
+	result = d.db.WithContext(ctx).Model(&table.File{}).Where(&table.File{
+		ID: id,
+	}).Delete(&table.File{})
+	if err := result.Error; err != nil {
+		return nil, errs.InternalServer
+
+	}
+	if result.RowsAffected != 1 {
+		return nil, errs.FileDelete
+	}
+	return &file, errs.No
+}
 
 func NewModel(db *gorm.DB, rdb *redis.Client) *DefaultModel {
 	return &DefaultModel{

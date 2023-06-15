@@ -16,8 +16,9 @@ import (
 type (
 	Model interface {
 		WordCount(jobName, inputPath, outputPath string) int32
-		JoinData(jobName, outputPath string, inputPath []string) int32
+		JoinWord(jobName, outputPath string, inputPath []string) int32
 		JobList(Id string) ([]*pb.Jobs, int32)
+		JoinData(jobName string) int32
 	}
 	DefaultModel struct {
 		Ssh *ssh.Client
@@ -25,6 +26,7 @@ type (
 )
 
 func (d *DefaultModel) WordCount(jobName, inputPath, outputPath string) int32 {
+	//开启mapreduce
 	session, err := d.Ssh.NewSession()
 	if err != nil {
 		log.Println(err)
@@ -34,20 +36,25 @@ func (d *DefaultModel) WordCount(jobName, inputPath, outputPath string) int32 {
 	// input path output path
 	if err = session.Start("hadoop jar " +
 		streamingJarPath +
-		" -D " + jobName +
+		Reduce +
+		JobName + "\"" + jobName + "\"" +
 		" -input " + inputPath +
 		" -output " + outputPath +
 		WordCountMapper +
 		WordCountReducer +
 		WordCountMapperFile +
-		WordCountReducer +
+		WordCountReducerFile +
 		" &"); err != nil {
 		return errs.InternalServer
 	}
 	return errs.No
 }
 
-func (d *DefaultModel) JoinData(jobName, outputPath string, inputPath []string) int32 {
+func (d *DefaultModel) JoinData(jobName string) int32 {
+	return errs.No
+}
+
+func (d *DefaultModel) JoinWord(jobName, outputPath string, inputPath []string) int32 {
 	session, err := d.Ssh.NewSession()
 	if err != nil {
 		log.Println(err)

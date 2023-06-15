@@ -29,6 +29,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Path:    "/file/list",
 					Handler: GetFileListHandler(serverCtx),
 				},
+				{
+					Method:  http.MethodDelete,
+					Path:    "/file/delete",
+					Handler: DeleteFileHandler(serverCtx),
+				},
 			}...,
 		),
 	)

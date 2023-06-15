@@ -95,6 +95,13 @@ func (l *UploadLogic) Upload(req *types.UploadReq, r *http.Request) (resp *types
 		}, nil
 	}
 	defer file.Close()
+	//如果不是pdf文件就直接结束
+	if filepath.Ext(handler.Filename) != ".pdf" {
+		return &types.UploadResp{
+			Status: errs.No,
+			Msg:    errs.ErrorsMap[errs.No].Error(),
+		}, nil
+	}
 	//文件信息写入数据库
 	//检查文件是否已存在,不存在就写入，因为前面上传也能拦截，所以差不多
 	response, err := l.svcCtx.FileRpc.Upload(l.ctx, &pb.UploadReq{

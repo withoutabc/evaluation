@@ -10,4 +10,8 @@ type Config struct {
 		Password string
 		Addr     string
 	}
+	Hdfs struct {
+		Addr string
+		User string
+	}
 }
