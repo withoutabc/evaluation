@@ -20,6 +20,11 @@ const (
 	FileIsExist  //上传时文件已经存在
 	FileNotExist //下载时文件不存在
 	ResultNotExist
+
+	RepeatedUsername //用户名重复
+	WrongPassword    //密码错误
+	WrongLevel       //等级不存在
+
 )
 
 var (
@@ -41,6 +46,10 @@ var (
 	FileIsExistErr    = errors.New("上传时文件已存在")
 	FileNotExistErr   = errors.New("下载时文件不存在")
 	ResultNotExistErr = errors.New("结果文件不存在")
+
+	RepeatedUsernameErr = errors.New("用户名重复")
+	WrongPasswordErr    = errors.New("密码错误")
+	WrongLevelErr       = errors.New("等级不存在")
 )
 
 var ErrorsMap = map[int32]error{
@@ -61,4 +70,8 @@ var ErrorsMap = map[int32]error{
 	FileIsExist:    FileIsExistErr,
 	FileNotExist:   FileNotExistErr,
 	ResultNotExist: ResultNotExistErr,
+
+	RepeatedUsername: RepeatedUsernameErr,
+	WrongPassword:    WrongPasswordErr,
+	WrongLevel:       WrongLevelErr,
 }

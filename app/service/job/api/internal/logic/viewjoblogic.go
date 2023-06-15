@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"rpc/app/service/job/rpc/pb"
 
 	"rpc/app/service/job/api/internal/svc"
 	"rpc/app/service/job/api/internal/types"
@@ -24,7 +25,10 @@ func NewViewJobLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ViewJobLo
 }
 
 func (l *ViewJobLogic) ViewJob(req *types.ViewJobsReq) (resp *types.ViewJobsResp, err error) {
-	// todo: add your logic here and delete this line
-
-	return
+	response, err := l.svcCtx.JobRpc.ViewJobs(l.ctx, &pb.ViewJobsReq{Id: req.Id})
+	return &types.ViewJobsResp{
+		Status:  response.StatusCode,
+		Msg:     response.StatusMsg,
+		JobList: response.Jobs,
+	}, nil
 }

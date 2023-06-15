@@ -1,13 +1,12 @@
 package handler
 
 import (
+	"github.com/zeromicro/go-zero/rest/httpx"
 	"log"
 	"net/http"
 	"net/url"
+	"rpc/app/common/consts/errs"
 	"rpc/app/service/file/api/internal/logic"
-	"rpc/app/service/file/errs"
-
-	"github.com/zeromicro/go-zero/rest/httpx"
 	"rpc/app/service/file/api/internal/svc"
 	"rpc/app/service/file/api/internal/types"
 )

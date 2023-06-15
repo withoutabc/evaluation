@@ -14,12 +14,37 @@ type CountJobResp struct {
 	JobName string `json:"job_name"`
 }
 
+type JoinJobReq struct {
+	Level int32 `form:"level"`
+	Begin int32 `form:"begin"`
+	End   int32 `form:"end"`
+}
+
+type JoinJobResp struct {
+	Status  int32  `json:"status"`
+	Msg     string `json:"msg"`
+	JobName string `json:"job_name"`
+}
+
 type ViewJobsReq struct {
-	Id int64 `path:"id"`
+	Id string `path:"id"`
 }
 
 type ViewJobsResp struct {
 	Status  int32       `json:"status"`
 	Msg     string      `json:"msg"`
 	JobList interface{} `json:"jobList"`
+}
+
+type ViewWordReq struct {
+	Level int32 `form:"level"`
+	Begin int32 `form:"begin"`
+	End   int32 `form:"end"`
+	Count int32 `form:"count"`
+}
+
+type ViewWordResp struct {
+	Status int32       `json:"status"`
+	Msg    string      `json:"msg"`
+	Words  interface{} `json:"words"`
 }

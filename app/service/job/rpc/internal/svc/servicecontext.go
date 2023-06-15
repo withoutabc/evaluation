@@ -3,7 +3,7 @@ package svc
 import (
 	"rpc/app/common/config/hadoop/ssh"
 	"rpc/app/service/job/rpc/internal/config"
-	"rpc/app/service/job/rpc/internal/mapreduce"
+	"rpc/app/service/job/rpc/internal/mapreduce/mapreduce"
 )
 
 type ServiceContext struct {

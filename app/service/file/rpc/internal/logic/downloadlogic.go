@@ -2,8 +2,7 @@ package logic
 
 import (
 	"context"
-	"rpc/app/service/file/errs"
-
+	"rpc/app/common/consts/errs"
 	"rpc/app/service/file/rpc/internal/svc"
 	"rpc/app/service/file/rpc/pb"
 

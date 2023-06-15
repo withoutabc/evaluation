@@ -7,9 +7,10 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+	"rpc/app/common/consts/errs"
+	"rpc/app/common/consts/maps"
 	"rpc/app/service/file/api/internal/svc"
 	"rpc/app/service/file/api/internal/types"
-	"rpc/app/service/file/errs"
 	"rpc/app/service/file/rpc/pb"
 	"rpc/utils/joinstring"
 	"strconv"
@@ -17,7 +18,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-const maxFileSize = 200 * (1 << 20) // 200 MB
+const maxFileSize = 1024 * (1 << 20) // 1GB
 
 type UploadLogic struct {
 	logx.Logger
@@ -64,7 +65,8 @@ func (l *UploadLogic) Upload(req *types.UploadReq, r *http.Request) (resp *types
 	str := joinstring.Join(req.Year, req.Month, req.Set, req.Level)
 	newFileName := joinstring.JoinOrigin(str) + filepath.Ext(handler.Filename)
 	// 创建一个目录，如果目录已存在则无操作
-	err = l.svcCtx.HdfsCli.MkdirAll("/evaluation/"+str, 0755)
+	mkdirPath := prefix + string(req.Year) + "/" + maps.LevelMap[req.Level] + "/" + str
+	err = l.svcCtx.HdfsCli.MkdirAll(mkdirPath, 0755)
 	if err != nil {
 		log.Printf("mkdirall err: %v", err)
 		return &types.UploadResp{
@@ -73,7 +75,7 @@ func (l *UploadLogic) Upload(req *types.UploadReq, r *http.Request) (resp *types
 		}, nil
 	}
 	// 传输路径
-	hdfsPath := "/evaluation/" + str + "/" + newFileName
+	hdfsPath := mkdirPath + "/" + newFileName
 	hdfsFile, err := l.svcCtx.HdfsCli.Create(hdfsPath)
 	if err != nil {
 		log.Printf("create err: %v", err)

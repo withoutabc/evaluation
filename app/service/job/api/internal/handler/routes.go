@@ -20,9 +20,19 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: CountJobHandler(serverCtx),
 				},
 				{
+					Method:  http.MethodPost,
+					Path:    "/join/job",
+					Handler: JoinJobHandler(serverCtx),
+				},
+				{
 					Method:  http.MethodGet,
 					Path:    "/view/job/:id",
 					Handler: ViewJobHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/view/words",
+					Handler: ViewWordHandler(serverCtx),
 				},
 			}...,
 		),

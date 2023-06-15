@@ -3,8 +3,8 @@ package logic
 import (
 	"bufio"
 	"context"
-	"log"
-	"rpc/app/service/file/errs"
+	"rpc/app/common/consts/errs"
+	"rpc/app/common/consts/maps"
 	"rpc/app/service/file/rpc/pb"
 	"rpc/utils/joinstring"
 
@@ -12,6 +12,10 @@ import (
 	"rpc/app/service/file/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
+)
+
+const (
+	prefix = "/evaluation/test/"
 )
 
 type DownloadLogic struct {
@@ -44,7 +48,8 @@ func (l *DownloadLogic) Download(req *types.DownloadReq) (resp *types.DownloadRe
 	//没有问题的话就去下载文件
 	str := joinstring.Join(req.Year, req.Month, req.Set, req.Level)
 	newFileName := joinstring.JoinOrigin(str) + ".pdf"
-	file, err := l.svcCtx.HdfsCli.Open("/evaluation/" + str + "/" + newFileName)
+	mkdirPath := prefix + string(req.Year) + "/" + maps.LevelMap[req.Level] + "/" + str
+	file, err := l.svcCtx.HdfsCli.Open(mkdirPath + "/" + newFileName)
 	reader := bufio.NewReader(file)
 	body = make([]byte, maxFileSize)
 	//读取文件
@@ -56,7 +61,6 @@ func (l *DownloadLogic) Download(req *types.DownloadReq) (resp *types.DownloadRe
 		}, nil, "", nil
 	}
 	defer file.Close()
-	log.Println("8")
 	return &types.DownloadResp{
 		Status: errs.No,
 		Msg:    errs.ErrorsMap[errs.No].Error(),

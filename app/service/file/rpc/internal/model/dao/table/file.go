@@ -27,7 +27,7 @@ func (*File) TableName() string {
 
 // BeforeCreate 创建文件时生成id
 func (f *File) BeforeCreate(_ *gorm.DB) (err error) {
-	f.ID = utils.GenerateId()
+	f.ID = utils.GenerateId(1)
 	f.Download = 0
 	f.CreateTime = time.Now()
 	f.UpdateTime = time.Now()

@@ -8,8 +8,8 @@ import (
 	"rpc/app/service/user/errs"
 	"rpc/app/service/user/rpc/internal/model/dao/table"
 	"rpc/app/service/user/rpc/pb"
-	"rpc/utils"
 	"rpc/utils/secret"
+	"rpc/utils/time"
 )
 
 type (
@@ -90,7 +90,7 @@ func (m *DefaultModel) Login(ctx context.Context, username, password string) (*p
 	return &pb.LoginResp_Data{
 		Id:           mysqlUser.ID,
 		Role:         mysqlUser.Role,
-		LoginTime:    utils.Time(),
+		LoginTime:    time.Time(),
 		AccessToken:  aToken,
 		RefreshToken: rToken,
 	}, errs.No

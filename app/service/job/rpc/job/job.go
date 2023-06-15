@@ -16,12 +16,19 @@ type (
 	CountJobReq  = pb.CountJobReq
 	CountJobResp = pb.CountJobResp
 	Jobs         = pb.Jobs
+	JoinJobReq   = pb.JoinJobReq
+	JoinJobResp  = pb.JoinJobResp
 	ViewJobsReq  = pb.ViewJobsReq
 	ViewJobsResp = pb.ViewJobsResp
+	ViewWordReq  = pb.ViewWordReq
+	ViewWordResp = pb.ViewWordResp
+	Words        = pb.Words
 
 	Job interface {
 		CountJob(ctx context.Context, in *CountJobReq, opts ...grpc.CallOption) (*CountJobResp, error)
+		JoinJob(ctx context.Context, in *JoinJobReq, opts ...grpc.CallOption) (*JoinJobResp, error)
 		ViewJobs(ctx context.Context, in *ViewJobsReq, opts ...grpc.CallOption) (*ViewJobsResp, error)
+		ViewWord(ctx context.Context, in *ViewWordReq, opts ...grpc.CallOption) (*ViewWordResp, error)
 	}
 
 	defaultJob struct {
@@ -40,7 +47,17 @@ func (m *defaultJob) CountJob(ctx context.Context, in *CountJobReq, opts ...grpc
 	return client.CountJob(ctx, in, opts...)
 }
 
+func (m *defaultJob) JoinJob(ctx context.Context, in *JoinJobReq, opts ...grpc.CallOption) (*JoinJobResp, error) {
+	client := pb.NewJobClient(m.cli.Conn())
+	return client.JoinJob(ctx, in, opts...)
+}
+
 func (m *defaultJob) ViewJobs(ctx context.Context, in *ViewJobsReq, opts ...grpc.CallOption) (*ViewJobsResp, error) {
 	client := pb.NewJobClient(m.cli.Conn())
 	return client.ViewJobs(ctx, in, opts...)
+}
+
+func (m *defaultJob) ViewWord(ctx context.Context, in *ViewWordReq, opts ...grpc.CallOption) (*ViewWordResp, error) {
+	client := pb.NewJobClient(m.cli.Conn())
+	return client.ViewWord(ctx, in, opts...)
 }

@@ -6,46 +6,75 @@ option go_package = "./pb";
 
 
 message CountJobReq{
-  int32 level =1;
-  int32 year=2;
-  int32 month=3;
-  int32 set=4;
+  int32 level = 1;
+  int32 year = 2;
+  int32 month = 3;
+  int32 set = 4;
 }
 
 message CountJobResp{
-  int32 status_code=1;
-  int32 status_msg=2;
-  string job_name=3;
+  int32 status_code = 1;
+  string status_msg = 2;
+  string job_name = 3;
+}
+
+message JoinJobReq{
+  int32 begin = 1;
+  int32 end = 2;
+  int32 level = 3;
+}
+
+message JoinJobResp{
+  int32 status_code = 1;
+  string status_msg = 2;
+  string job_name = 3;
 }
 
 message ViewJobsReq{
-  int32 id=1;
+  string id = 1;
 }
 
 message Jobs{
-  string jobID=1;
-  string jobName=2;
-  string jobStatus=3;
+  string  id = 1;
+  string name = 2;
+  string status = 3;
+  string final_status = 4;
+  int32 progress = 5;
+  string tracking_url = 6;
+  string started_time = 7;
+  string launch_time = 8;
+  string finished_time = 9;
+  string elapsed_time = 10;
+
 }
 
 message ViewJobsResp{
-  repeated Jobs Jobs =1;
+  int32 status_code = 1;
+  string status_msg = 2;
+  repeated Jobs Jobs = 3;
 }
-/*
-    {
-        Level int32 `form:"level"`
-        Year int32 `form:"year"`
-        Month int32 `form:"month"`
-        Set int32 `form:"set"`
-    }
 
-    CountJobResp {
-        Status int32 `json:"status"`
-        Msg string `json:"msg"`
-        JobName string `json:"job_name"`
-    }
- */
+message ViewWordReq{
+  int32 level=1;
+  int32 begin=2;
+  int32 end=3;
+  int32 count=4;
+}
+
+message Words{
+  string word=1;
+  int64 count=2;
+}
+
+message ViewWordResp{
+  int32 status_code = 1;
+  string status_msg = 2;
+  repeated Words Words=3;
+}
+
 service job {
   rpc CountJob(CountJobReq)returns(CountJobResp);
-rpc ViewJobs(ViewJobsReq)returns(ViewJobsResp);
+  rpc JoinJob(JoinJobReq)returns(JoinJobResp);
+  rpc ViewJobs(ViewJobsReq)returns(ViewJobsResp);
+  rpc ViewWord(ViewWordReq)returns(ViewWordResp);
 }

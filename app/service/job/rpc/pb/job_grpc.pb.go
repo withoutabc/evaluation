@@ -20,7 +20,9 @@ const _ = grpc.SupportPackageIsVersion7
 
 const (
 	Job_CountJob_FullMethodName = "/file.job/CountJob"
+	Job_JoinJob_FullMethodName  = "/file.job/JoinJob"
 	Job_ViewJobs_FullMethodName = "/file.job/ViewJobs"
+	Job_ViewWord_FullMethodName = "/file.job/ViewWord"
 )
 
 // JobClient is the client API for Job service.
@@ -28,7 +30,9 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type JobClient interface {
 	CountJob(ctx context.Context, in *CountJobReq, opts ...grpc.CallOption) (*CountJobResp, error)
+	JoinJob(ctx context.Context, in *JoinJobReq, opts ...grpc.CallOption) (*JoinJobResp, error)
 	ViewJobs(ctx context.Context, in *ViewJobsReq, opts ...grpc.CallOption) (*ViewJobsResp, error)
+	ViewWord(ctx context.Context, in *ViewWordReq, opts ...grpc.CallOption) (*ViewWordResp, error)
 }
 
 type jobClient struct {
@@ -48,9 +52,27 @@ func (c *jobClient) CountJob(ctx context.Context, in *CountJobReq, opts ...grpc.
 	return out, nil
 }
 
+func (c *jobClient) JoinJob(ctx context.Context, in *JoinJobReq, opts ...grpc.CallOption) (*JoinJobResp, error) {
+	out := new(JoinJobResp)
+	err := c.cc.Invoke(ctx, Job_JoinJob_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *jobClient) ViewJobs(ctx context.Context, in *ViewJobsReq, opts ...grpc.CallOption) (*ViewJobsResp, error) {
 	out := new(ViewJobsResp)
 	err := c.cc.Invoke(ctx, Job_ViewJobs_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *jobClient) ViewWord(ctx context.Context, in *ViewWordReq, opts ...grpc.CallOption) (*ViewWordResp, error) {
+	out := new(ViewWordResp)
+	err := c.cc.Invoke(ctx, Job_ViewWord_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +84,9 @@ func (c *jobClient) ViewJobs(ctx context.Context, in *ViewJobsReq, opts ...grpc.
 // for forward compatibility
 type JobServer interface {
 	CountJob(context.Context, *CountJobReq) (*CountJobResp, error)
+	JoinJob(context.Context, *JoinJobReq) (*JoinJobResp, error)
 	ViewJobs(context.Context, *ViewJobsReq) (*ViewJobsResp, error)
+	ViewWord(context.Context, *ViewWordReq) (*ViewWordResp, error)
 	mustEmbedUnimplementedJobServer()
 }
 
@@ -73,8 +97,14 @@ type UnimplementedJobServer struct {
 func (UnimplementedJobServer) CountJob(context.Context, *CountJobReq) (*CountJobResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CountJob not implemented")
 }
+func (UnimplementedJobServer) JoinJob(context.Context, *JoinJobReq) (*JoinJobResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method JoinJob not implemented")
+}
 func (UnimplementedJobServer) ViewJobs(context.Context, *ViewJobsReq) (*ViewJobsResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ViewJobs not implemented")
+}
+func (UnimplementedJobServer) ViewWord(context.Context, *ViewWordReq) (*ViewWordResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ViewWord not implemented")
 }
 func (UnimplementedJobServer) mustEmbedUnimplementedJobServer() {}
 
@@ -107,6 +137,24 @@ func _Job_CountJob_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Job_JoinJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(JoinJobReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JobServer).JoinJob(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Job_JoinJob_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JobServer).JoinJob(ctx, req.(*JoinJobReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Job_ViewJobs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ViewJobsReq)
 	if err := dec(in); err != nil {
@@ -125,6 +173,24 @@ func _Job_ViewJobs_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Job_ViewWord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ViewWordReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JobServer).ViewWord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Job_ViewWord_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JobServer).ViewWord(ctx, req.(*ViewWordReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Job_ServiceDesc is the grpc.ServiceDesc for Job service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -137,8 +203,16 @@ var Job_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Job_CountJob_Handler,
 		},
 		{
+			MethodName: "JoinJob",
+			Handler:    _Job_JoinJob_Handler,
+		},
+		{
 			MethodName: "ViewJobs",
 			Handler:    _Job_ViewJobs_Handler,
+		},
+		{
+			MethodName: "ViewWord",
+			Handler:    _Job_ViewWord_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

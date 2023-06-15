@@ -1,6 +1,9 @@
 package joinstring
 
-import "fmt"
+import (
+	"fmt"
+	"rpc/app/common/consts/maps"
+)
 
 const (
 	origin = "origin"
@@ -8,21 +11,12 @@ const (
 	result = "result"
 )
 
-var levelMap = map[int32]string{
-	4: "四级",
-	6: "六级",
-}
-
 func Join(year, month, set, level int32) string {
-	return fmt.Sprintf("%d-%d-%d-%s", year, month, set, levelMap[level])
+	return fmt.Sprintf("%d-%d-%d-%s", year, month, set, maps.LevelMap[level])
 }
 
 func JoinOrigin(s string) string {
 	return fmt.Sprintf("%s-%s", s, origin)
-}
-
-func JoinDealt(s string) string {
-	return fmt.Sprintf("%s-%s", s, dealt)
 }
 
 func JoinResult(s string) string {

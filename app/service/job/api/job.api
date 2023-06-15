@@ -16,8 +16,21 @@ type (
 )
 
 type (
+	JoinJobReq {
+		Level int32 `form:"level"`
+		Begin int32 `form:"begin"`
+		End   int32 `form:"end"`
+	}
+	JoinJobResp {
+		Status  int32  `json:"status"`
+		Msg     string `json:"msg"`
+		JobName string `json:"job_name"`
+	}
+)
+
+type (
 	ViewJobsReq {
-		Id int64 `path:"id"`
+		Id string `path:"id"`
 	}
 
 	ViewJobsResp {
@@ -27,20 +40,20 @@ type (
 	}
 )
 
-//type (
-//    GetFileListReq {
-//        Level int32 `form:"level,optional"`
-//        Year int32 `form:"year,optional"`
-//        Month int32 `form:"month,optional"`
-//        Set int32 `form:"set,optional"`
-//    }
-//
-//    GetFileListResp {
-//        Status int32 `json:"status"`
-//        Msg string `json:"msg"`
-//        List interface{} `json:"list,omitempty"`
-//    }
-//)
+type (
+	ViewWordReq {
+		Level int32 `form:"level"`
+		Begin int32 `form:"begin"`
+		End   int32 `form:"end"`
+		Count int32 `form:"count"`
+	}
+	ViewWordResp {
+		Status int32       `json:"status"`
+		Msg    string      `json:"msg"`
+		Words  interface{} `json:"words"`
+	}
+)
+
 @server(
 	middleware : CORSMIDDLEWARE,JWTMIDDLEWARE
 )
@@ -49,7 +62,13 @@ service job {
 	@doc "提交计数任务"
 	@handler CountJob
 	post /submit/job (CountJobReq) returns (CountJobResp)
+	@doc "提交计数任务"
+	@handler JoinJob
+	post /join/job (JoinJobReq) returns (JoinJobResp)
 	@doc "查看作业情况"
 	@handler ViewJob
 	get /view/job/:id (ViewJobsReq) returns (ViewJobsResp)
+	@doc "查看高频单词"
+	@handler ViewWord
+	post /view/words (ViewWordReq) returns (ViewWordResp)
 }
