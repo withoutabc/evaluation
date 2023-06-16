@@ -15,6 +15,7 @@ type CountJobResp struct {
 }
 
 type JoinDataReq struct {
+	Type  int32 `form:"type"` //1-count数据聚合  2-
 	Level int32 `form:"level"`
 	Year  int32 `form:"year"`
 	Month int32 `form:"month"`

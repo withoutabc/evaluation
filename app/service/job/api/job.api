@@ -17,6 +17,7 @@ type (
 
 type (
 	JoinDataReq {
+		Type  int32 `form:"type"` //1-count数据聚合  2-
 		Level int32 `form:"level"`
 		Year  int32 `form:"year"`
 		Month int32 `form:"month"`
@@ -63,8 +64,8 @@ service job {
 	@handler CountJob
 	post /submit/job (CountJobReq) returns (CountJobResp)
 	@doc "提交计数任务"
-	@handler JoinJob
-	post /join/job (JoinDataReq) returns (JoinDataResp)
+	@handler JoinData
+	post /join/Data (JoinDataReq) returns (JoinDataResp)
 	@doc "查看作业情况"
 	@handler ViewJob
 	get /view/job/:id (ViewJobsReq) returns (ViewJobsResp)

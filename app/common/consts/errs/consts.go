@@ -25,7 +25,7 @@ const (
 	RepeatedUsername //用户名重复
 	WrongPassword    //密码错误
 	WrongLevel       //等级不存在
-
+	UnknownType
 )
 
 var (
@@ -52,6 +52,7 @@ var (
 	RepeatedUsernameErr = errors.New("用户名重复")
 	WrongPasswordErr    = errors.New("密码错误")
 	WrongLevelErr       = errors.New("等级不存在")
+	UnknownTypeErr      = errors.New("不存在的type")
 )
 
 var ErrorsMap = map[int32]error{
@@ -77,4 +78,5 @@ var ErrorsMap = map[int32]error{
 	RepeatedUsername: RepeatedUsernameErr,
 	WrongPassword:    WrongPasswordErr,
 	WrongLevel:       WrongLevelErr,
+	UnknownType:      UnknownTypeErr,
 }

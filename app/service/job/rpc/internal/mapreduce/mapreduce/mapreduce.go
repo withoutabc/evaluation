@@ -18,7 +18,6 @@ type (
 		WordCount(jobName, inputPath, outputPath string) int32 //1
 		JoinWord(jobName, outputPath string, inputPath []string) int32
 		JobList(Id string) ([]*pb.Jobs, int32)
-		JoinData(jobName string) int32 //对应1
 	}
 	DefaultModel struct {
 		Ssh *ssh.Client
@@ -34,7 +33,7 @@ func (d *DefaultModel) WordCount(jobName, inputPath, outputPath string) int32 {
 	}
 	defer session.Close()
 	// input path output path
-	if err = session.Start("hadoop jar " +
+	cmd := "hadoop jar " +
 		streamingJarPath +
 		Reduce +
 		JobName + "\"" + jobName + "\"" +
@@ -44,14 +43,11 @@ func (d *DefaultModel) WordCount(jobName, inputPath, outputPath string) int32 {
 		WordCountReducer +
 		WordCountMapperFile +
 		WordCountReducerFile +
-		" &"); err != nil {
+		" &"
+	if err = session.Start(cmd); err != nil {
 		return errs.InternalServer
 	}
-	return errs.No
-}
-
-func (d *DefaultModel) JoinData(jobName string) int32 {
-
+	log.Println(cmd)
 	return errs.No
 }
 

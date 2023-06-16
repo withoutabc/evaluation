@@ -19,6 +19,9 @@ func JoinOrigin(s string) string {
 	return fmt.Sprintf("%s-%s", s, origin)
 }
 
+func JoinResult(s string) string {
+	return fmt.Sprintf("%s-%s.txt", s, result)
+}
 func JoinJobName(origin, jobName string) string {
 	return fmt.Sprintf("%s*%s", origin, jobName)
 }

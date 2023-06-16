@@ -28,7 +28,6 @@ message JoinDataReq{
 message JoinDataResp{
   int32 status_code = 1;
   string status_msg = 2;
-  string job_name = 3;
 }
 
 message ViewJobsReq{

@@ -21,8 +21,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/join/job",
-					Handler: JoinJobHandler(serverCtx),
+					Path:    "/join/Data",
+					Handler: JoinDataHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
