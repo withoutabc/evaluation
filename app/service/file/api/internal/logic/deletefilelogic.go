@@ -6,6 +6,7 @@ import (
 	"rpc/app/common/consts/maps"
 	"rpc/app/service/file/rpc/pb"
 	"rpc/utils/joinstring"
+	"strconv"
 
 	"rpc/app/service/file/api/internal/svc"
 	"rpc/app/service/file/api/internal/types"
@@ -39,7 +40,7 @@ func (l *DeleteFileLogic) DeleteFile(req *types.RemoveFileReq) (resp *types.Remo
 	}
 	//删除文件
 	str := joinstring.Join(response.File.Year, response.File.Month, response.File.Set, response.File.Level)
-	mkdirPath := prefix + string(response.File.Year) + "/" + maps.LevelMap[response.File.Level] + "/" + str
+	mkdirPath := prefix + strconv.Itoa(int(response.File.Year)) + "/" + maps.LevelMap[response.File.Level] + "/" + str
 	err = l.svcCtx.HdfsCli.Remove(mkdirPath)
 	if err != nil {
 		return &types.RemoveFileResp{

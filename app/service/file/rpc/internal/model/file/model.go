@@ -106,7 +106,6 @@ func (d *DefaultModel) Download(ctx context.Context, id int64, downloadType int3
 	}
 	if downloadType == 2 {
 		//判断是否生成了结果
-		var file table.File
 		result = d.db.WithContext(ctx).Where(&table.File{ID: id}).First(&file)
 		if err := result.Error; err != nil {
 			log.Println(err)

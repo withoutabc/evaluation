@@ -60,12 +60,12 @@ func (l *UploadLogic) Upload(req *types.UploadReq, r *http.Request) (resp *types
 			Msg:    errs.ErrorsMap[errs.FileNameWrong].Error(),
 		}, nil
 	}
-
 	// 重命名文件
 	str := joinstring.Join(req.Year, req.Month, req.Set, req.Level)
 	newFileName := joinstring.JoinOrigin(str) + filepath.Ext(handler.Filename)
 	// 创建一个目录，如果目录已存在则无操作
-	mkdirPath := prefix + string(req.Year) + "/" + maps.LevelMap[req.Level] + "/" + str
+	mkdirPath := prefix + strconv.Itoa(int(req.Year)) + "/" + maps.LevelMap[req.Level] + "/" + str
+	log.Println(strconv.Itoa(int(req.Year)))
 	err = l.svcCtx.HdfsCli.MkdirAll(mkdirPath, 0755)
 	if err != nil {
 		log.Printf("mkdirall err: %v", err)
@@ -80,8 +80,8 @@ func (l *UploadLogic) Upload(req *types.UploadReq, r *http.Request) (resp *types
 	if err != nil {
 		log.Printf("create err: %v", err)
 		return &types.UploadResp{
-			Status: errs.FileSystemInternal,
-			Msg:    errs.ErrorsMap[errs.FileSystemInternal].Error(),
+			Status: errs.FileIsExist,
+			Msg:    errs.ErrorsMap[errs.FileIsExist].Error(),
 		}, nil
 	}
 	defer hdfsFile.Close()

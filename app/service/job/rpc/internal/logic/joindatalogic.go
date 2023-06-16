@@ -9,6 +9,7 @@ import (
 	"rpc/app/common/consts/errs"
 	"rpc/app/common/consts/maps"
 	"rpc/utils/joinstring"
+	"strconv"
 
 	"rpc/app/service/job/rpc/internal/svc"
 	"rpc/app/service/job/rpc/pb"
@@ -34,7 +35,7 @@ func (l *JoinDataLogic) JoinData(in *pb.JoinDataReq) (*pb.JoinDataResp, error) {
 	//找到输出的文件夹
 	str := joinstring.Join(in.Year, in.Month, in.Set, in.Level)
 	jobName := joinstring.JoinJobName(str, "wordcount")
-	outputPath := prefix + string(in.Year) + "/" + maps.LevelMap[in.Level] + "/" + str + "/" + jobName
+	outputPath := prefix + strconv.Itoa(int(in.Year)) + "/" + maps.LevelMap[in.Level] + "/" + str + "/" + jobName
 
 	// 读取输出目录中的所有文件
 	fileInfos, err := l.svcCtx.HdfsCli.ReadDir(outputPath)
@@ -44,14 +45,14 @@ func (l *JoinDataLogic) JoinData(in *pb.JoinDataReq) (*pb.JoinDataResp, error) {
 
 	//找到聚合后的位置
 	resultFilename := joinstring.JoinResult(str)
-	targetPath := prefix + string(in.Year) + "/" + maps.LevelMap[in.Level] + "/" + str + "/" + resultFilename //聚合后的目标路径
+	targetPath := prefix + strconv.Itoa(int(in.Year)) + "/" + maps.LevelMap[in.Level] + "/" + str + "/" + resultFilename //聚合后的目标路径
 	//创建文件
 	targetFile, err := l.svcCtx.HdfsCli.Create(targetPath)
 	if err != nil {
 		log.Println(err)
 		return &pb.JoinDataResp{
-			StatusCode: errs.FileSystemInternal,
-			StatusMsg:  errs.ErrorsMap[errs.FileSystemInternal].Error(),
+			StatusCode: errs.FileIsExist,
+			StatusMsg:  errs.ErrorsMap[errs.FileIsExist].Error(),
 		}, nil
 	}
 	defer targetFile.Close()

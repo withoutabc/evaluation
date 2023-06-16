@@ -31,6 +31,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				},
 				{
 					Method:  http.MethodPost,
+					Path:    "/collect/job",
+					Handler: CollectJobHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
 					Path:    "/view/words",
 					Handler: ViewWordHandler(serverCtx),
 				},

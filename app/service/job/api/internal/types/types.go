@@ -38,14 +38,28 @@ type ViewJobsResp struct {
 }
 
 type ViewWordReq struct {
-	Level int32 `form:"level"`
-	Begin int32 `form:"begin"`
-	End   int32 `form:"end"`
-	Count int32 `form:"count"`
+	Level  int32 `form:"level"`
+	Begin  int32 `form:"begin"`
+	End    int32 `form:"end"`
+	Count  int32 `form:"count"`
+	Except int32 `form:"except"`
 }
 
 type ViewWordResp struct {
 	Status int32       `json:"status"`
 	Msg    string      `json:"msg"`
 	Words  interface{} `json:"words"`
+}
+
+type CollectJobReq struct {
+	Begin  int32 `form:"begin"`
+	End    int32 `form:"end"`
+	Level  int32 `form:"level"`
+	Except int32 `form:"except"`
+}
+
+type CollectJobResp struct {
+	Status  int32  `json:"status"`
+	Msg     string `json:"msg"`
+	JobName string `json:"job_name"`
 }

@@ -6,9 +6,9 @@ type Config struct {
 	zrpc.RpcServerConf
 
 	Ssh struct {
+		Addr     string
 		User     string
 		Password string
-		Addr     string
 	}
 	Hdfs struct {
 		Addr string

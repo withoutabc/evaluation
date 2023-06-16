@@ -1,18 +1,10 @@
 Name: job
 Host: 0.0.0.0
-Port: 8888
+Port: 1003
 
 JobRpc:
   Etcd:
     Hosts:
-      - 127.0.0.1:2379
+      - 127.0.0.1:2380
     Key: job.rpc
 
-Log:
-  ServiceName: user
-  Mode: file
-  Path: logs
-  Level: info
-  Encoding: plain
-  Compress: true
-  KeepDays: 7

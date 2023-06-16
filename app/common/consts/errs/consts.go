@@ -26,6 +26,7 @@ const (
 	WrongPassword    //密码错误
 	WrongLevel       //等级不存在
 	UnknownType
+	UnknownExcept
 )
 
 var (
@@ -53,6 +54,7 @@ var (
 	WrongPasswordErr    = errors.New("密码错误")
 	WrongLevelErr       = errors.New("等级不存在")
 	UnknownTypeErr      = errors.New("不存在的type")
+	UnknownExceptErr    = errors.New("单词列表不存在")
 )
 
 var ErrorsMap = map[int32]error{
@@ -79,4 +81,5 @@ var ErrorsMap = map[int32]error{
 	WrongPassword:    WrongPasswordErr,
 	WrongLevel:       WrongLevelErr,
 	UnknownType:      UnknownTypeErr,
+	UnknownExcept:    UnknownExceptErr,
 }

@@ -509,3 +509,12 @@
 2023-06-14T15:09:18.517+08:00	[32;1m stat [0m	(user.rpc) - qps: 0.0/s, drops: 0, avg time: 0.0ms, med: 0.0ms, 90th: 0.0ms, 99th: 0.0ms, 99.9th: 0.0ms	caller=stat/metrics.go:210
 2023-06-14T15:27:40.592+08:00	[32;1m stat [0m	CPU: 0m, MEMORY: Alloc=3.8Mi, TotalAlloc=7.1Mi, Sys=22.4Mi, NumGC=3	caller=stat/usage.go:61
 2023-06-14T15:27:40.720+08:00	[32;1m stat [0m	(rpc) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0	caller=load/sheddingstat.go:61
+2023-06-16T18:41:33.423+08:00	[32;1m stat [0m	CPU: 0m, MEMORY: Alloc=4.0Mi, TotalAlloc=7.3Mi, Sys=18.5Mi, NumGC=3	caller=stat/usage.go:61
+2023-06-16T18:41:33.488+08:00	[32;1m stat [0m	(rpc) shedding_stat [1m], cpu: 0, total: 1, pass: 1, drop: 0	caller=load/sheddingstat.go:61
+2023-06-16T18:41:50.380+08:00	[32;1m stat [0m	(user.rpc) - qps: 0.0/s, drops: 0, avg time: 196.0ms, med: 196.2ms, 90th: 196.2ms, 99th: 196.2ms, 99.9th: 196.2ms	caller=stat/metrics.go:210
+2023-06-16T18:42:33.427+08:00	[32;1m stat [0m	CPU: 0m, MEMORY: Alloc=4.1Mi, TotalAlloc=7.4Mi, Sys=18.5Mi, NumGC=3	caller=stat/usage.go:61
+2023-06-16T18:42:33.493+08:00	[32;1m stat [0m	(rpc) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0	caller=load/sheddingstat.go:61
+2023-06-16T18:42:50.379+08:00	[32;1m stat [0m	(user.rpc) - qps: 0.0/s, drops: 0, avg time: 0.0ms, med: 0.0ms, 90th: 0.0ms, 99th: 0.0ms, 99.9th: 0.0ms	caller=stat/metrics.go:210
+2023-06-16T18:43:33.423+08:00	[32;1m stat [0m	CPU: 0m, MEMORY: Alloc=3.8Mi, TotalAlloc=7.4Mi, Sys=18.5Mi, NumGC=4	caller=stat/usage.go:61
+2023-06-16T18:43:33.495+08:00	[32;1m stat [0m	(rpc) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0	caller=load/sheddingstat.go:61
+2023-06-16T18:43:50.389+08:00	[32;1m stat [0m	(user.rpc) - qps: 0.0/s, drops: 0, avg time: 0.0ms, med: 0.0ms, 90th: 0.0ms, 99th: 0.0ms, 99.9th: 0.0ms	caller=stat/metrics.go:210

@@ -43,15 +43,30 @@ type (
 
 type (
 	ViewWordReq {
-		Level int32 `form:"level"`
-		Begin int32 `form:"begin"`
-		End   int32 `form:"end"`
-		Count int32 `form:"count"`
+		Level  int32 `form:"level"`
+		Begin  int32 `form:"begin"`
+		End    int32 `form:"end"`
+		Count  int32 `form:"count"`
+		Except int32 `form:"except"`
 	}
 	ViewWordResp {
 		Status int32       `json:"status"`
 		Msg    string      `json:"msg"`
 		Words  interface{} `json:"words"`
+	}
+)
+
+type (
+	CollectJobReq {
+		Begin  int32 `form:"begin"`
+		End    int32 `form:"end"`
+		Level  int32 `form:"level"`
+		Except int32 `form:"except"`
+	}
+	CollectJobResp {
+		Status  int32  `json:"status"`
+		Msg     string `json:"msg"`
+		JobName string `json:"job_name"`
 	}
 )
 
@@ -69,6 +84,9 @@ service job {
 	@doc "查看作业情况"
 	@handler ViewJob
 	get /view/job/:id (ViewJobsReq) returns (ViewJobsResp)
+	@doc "统计历年单词"
+	@handler CollectJob
+	post /collect/job (CollectJobReq) returns (CollectJobResp)
 	@doc "查看高频单词"
 	@handler ViewWord
 	post /view/words (ViewWordReq) returns (ViewWordResp)

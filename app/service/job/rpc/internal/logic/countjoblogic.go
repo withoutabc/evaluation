@@ -5,6 +5,7 @@ import (
 	"rpc/app/common/consts/errs"
 	"rpc/app/common/consts/maps"
 	"rpc/utils/joinstring"
+	"strconv"
 
 	"rpc/app/service/job/rpc/internal/svc"
 	"rpc/app/service/job/rpc/pb"
@@ -36,9 +37,9 @@ func (l *CountJobLogic) CountJob(in *pb.CountJobReq) (*pb.CountJobResp, error) {
 	jobName := joinstring.JoinJobName(str, "wordcount")
 	//input path
 	newFileName := joinstring.JoinOrigin(str) + ".txt"
-	inputPath := prefix + string(in.Year) + "/" + maps.LevelMap[in.Level] + "/" + str + "/" + newFileName
+	inputPath := prefix + strconv.Itoa(int(in.Year)) + "/" + maps.LevelMap[in.Level] + "/" + str + "/" + newFileName
 	//output path
-	outputPath := prefix + string(in.Year) + "/" + maps.LevelMap[in.Level] + "/" + str + "/" + jobName
+	outputPath := prefix + strconv.Itoa(int(in.Year)) + "/" + maps.LevelMap[in.Level] + "/" + str + "/" + jobName
 	code := l.svcCtx.JobModel.WordCount(jobName, inputPath, outputPath)
 	return &pb.CountJobResp{
 		StatusCode: code,

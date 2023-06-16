@@ -5,7 +5,8 @@ import (
 	"github.com/go-redis/redis/v8"
 	"gorm.io/gorm"
 	"log"
-	"rpc/app/service/user/errs"
+	"rpc/app/common/consts/errs"
+
 	"rpc/app/service/user/rpc/internal/model/dao/table"
 	"rpc/app/service/user/rpc/pb"
 	"rpc/utils/secret"

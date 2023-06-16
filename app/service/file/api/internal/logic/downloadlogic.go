@@ -7,6 +7,7 @@ import (
 	"rpc/app/common/consts/maps"
 	"rpc/app/service/file/rpc/pb"
 	"rpc/utils/joinstring"
+	"strconv"
 
 	"rpc/app/service/file/api/internal/svc"
 	"rpc/app/service/file/api/internal/types"
@@ -48,7 +49,7 @@ func (l *DownloadLogic) Download(req *types.DownloadReq) (resp *types.DownloadRe
 	//没有问题的话就去下载文件
 	str := joinstring.Join(req.Year, req.Month, req.Set, req.Level)
 	newFileName := joinstring.JoinOrigin(str) + ".pdf"
-	mkdirPath := prefix + string(req.Year) + "/" + maps.LevelMap[req.Level] + "/" + str
+	mkdirPath := prefix + strconv.Itoa(int(req.Year)) + "/" + maps.LevelMap[req.Level] + "/" + str
 	file, err := l.svcCtx.HdfsCli.Open(mkdirPath + "/" + newFileName)
 	reader := bufio.NewReader(file)
 	body = make([]byte, maxFileSize)

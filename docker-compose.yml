@@ -1,0 +1,18 @@
+version: '3'
+services:
+  Etcd:
+    container_name: etcd-evaluation
+    image: bitnami/etcd:${ETCD_VERSION}
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+    privileged: true
+    volumes:
+      - ${ETCD_DIR}/data:/bitnami/etcd/data
+    ports:
+      - ${ETCD_PORT1}:2379
+      - ${ETCD_PORT2}:2380
+      - ${ETCD_PORT3}:2381

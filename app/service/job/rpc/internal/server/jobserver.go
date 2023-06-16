@@ -37,6 +37,11 @@ func (s *JobServer) ViewJobs(ctx context.Context, in *pb.ViewJobsReq) (*pb.ViewJ
 	return l.ViewJobs(in)
 }
 
+func (s *JobServer) CollectJob(ctx context.Context, in *pb.CollectJobReq) (*pb.CollectJobResp, error) {
+	l := logic.NewCollectJobLogic(ctx, s.svcCtx)
+	return l.CollectJob(in)
+}
+
 func (s *JobServer) ViewWord(ctx context.Context, in *pb.ViewWordReq) (*pb.ViewWordResp, error) {
 	l := logic.NewViewWordLogic(ctx, s.svcCtx)
 	return l.ViewWord(in)

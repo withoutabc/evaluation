@@ -19,10 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Job_CountJob_FullMethodName = "/file.job/CountJob"
-	Job_JoinData_FullMethodName = "/file.job/JoinData"
-	Job_ViewJobs_FullMethodName = "/file.job/ViewJobs"
-	Job_ViewWord_FullMethodName = "/file.job/ViewWord"
+	Job_CountJob_FullMethodName   = "/file.job/CountJob"
+	Job_JoinData_FullMethodName   = "/file.job/JoinData"
+	Job_ViewJobs_FullMethodName   = "/file.job/ViewJobs"
+	Job_CollectJob_FullMethodName = "/file.job/CollectJob"
+	Job_ViewWord_FullMethodName   = "/file.job/ViewWord"
 )
 
 // JobClient is the client API for Job service.
@@ -32,6 +33,7 @@ type JobClient interface {
 	CountJob(ctx context.Context, in *CountJobReq, opts ...grpc.CallOption) (*CountJobResp, error)
 	JoinData(ctx context.Context, in *JoinDataReq, opts ...grpc.CallOption) (*JoinDataResp, error)
 	ViewJobs(ctx context.Context, in *ViewJobsReq, opts ...grpc.CallOption) (*ViewJobsResp, error)
+	CollectJob(ctx context.Context, in *CollectJobReq, opts ...grpc.CallOption) (*CollectJobResp, error)
 	ViewWord(ctx context.Context, in *ViewWordReq, opts ...grpc.CallOption) (*ViewWordResp, error)
 }
 
@@ -70,6 +72,15 @@ func (c *jobClient) ViewJobs(ctx context.Context, in *ViewJobsReq, opts ...grpc.
 	return out, nil
 }
 
+func (c *jobClient) CollectJob(ctx context.Context, in *CollectJobReq, opts ...grpc.CallOption) (*CollectJobResp, error) {
+	out := new(CollectJobResp)
+	err := c.cc.Invoke(ctx, Job_CollectJob_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *jobClient) ViewWord(ctx context.Context, in *ViewWordReq, opts ...grpc.CallOption) (*ViewWordResp, error) {
 	out := new(ViewWordResp)
 	err := c.cc.Invoke(ctx, Job_ViewWord_FullMethodName, in, out, opts...)
@@ -86,6 +97,7 @@ type JobServer interface {
 	CountJob(context.Context, *CountJobReq) (*CountJobResp, error)
 	JoinData(context.Context, *JoinDataReq) (*JoinDataResp, error)
 	ViewJobs(context.Context, *ViewJobsReq) (*ViewJobsResp, error)
+	CollectJob(context.Context, *CollectJobReq) (*CollectJobResp, error)
 	ViewWord(context.Context, *ViewWordReq) (*ViewWordResp, error)
 	mustEmbedUnimplementedJobServer()
 }
@@ -102,6 +114,9 @@ func (UnimplementedJobServer) JoinData(context.Context, *JoinDataReq) (*JoinData
 }
 func (UnimplementedJobServer) ViewJobs(context.Context, *ViewJobsReq) (*ViewJobsResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ViewJobs not implemented")
+}
+func (UnimplementedJobServer) CollectJob(context.Context, *CollectJobReq) (*CollectJobResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CollectJob not implemented")
 }
 func (UnimplementedJobServer) ViewWord(context.Context, *ViewWordReq) (*ViewWordResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ViewWord not implemented")
@@ -173,6 +188,24 @@ func _Job_ViewJobs_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Job_CollectJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CollectJobReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JobServer).CollectJob(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Job_CollectJob_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JobServer).CollectJob(ctx, req.(*CollectJobReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Job_ViewWord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ViewWordReq)
 	if err := dec(in); err != nil {
@@ -209,6 +242,10 @@ var Job_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ViewJobs",
 			Handler:    _Job_ViewJobs_Handler,
+		},
+		{
+			MethodName: "CollectJob",
+			Handler:    _Job_CollectJob_Handler,
 		},
 		{
 			MethodName: "ViewWord",

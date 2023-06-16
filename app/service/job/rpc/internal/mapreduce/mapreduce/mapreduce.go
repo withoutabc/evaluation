@@ -15,14 +15,52 @@ import (
 
 type (
 	Model interface {
-		WordCount(jobName, inputPath, outputPath string) int32 //1
+		WordCount(jobName, inputPath, outputPath string) int32
 		JoinWord(jobName, outputPath string, inputPath []string) int32
 		JobList(Id string) ([]*pb.Jobs, int32)
+		Collect(jobName, outputPath string, inputPaths []string, exceptPath string) int32
 	}
 	DefaultModel struct {
 		Ssh *ssh.Client
 	}
 )
+
+func (d *DefaultModel) Collect(jobName, outputPath string, inputPaths []string, exceptPath string) int32 {
+	//开启mapreduce
+	session, err := d.Ssh.NewSession()
+	if err != nil {
+		log.Println(err)
+		return errs.InternalServer
+	}
+	defer session.Close()
+	var input string
+	for i := 0; i < len(inputPaths); i++ {
+		if i == 0 {
+			input = fmt.Sprintf("%s", inputPaths[i])
+		} else {
+			input = fmt.Sprintf(",%s", inputPaths[i])
+		}
+	}
+	input = fmt.Sprintf(",%s", exceptPath)
+	log.Println(input)
+	// input path output path
+	cmd := "hadoop jar " +
+		streamingJarPath +
+		Reduce +
+		JobName + "\"" + jobName + "\"" +
+		" -input " + input +
+		" -output " + outputPath +
+		CollectMapper +
+		CollectReducer +
+		CollectMapperFile +
+		CollectReducerFile +
+		" &"
+	if err = session.Start(cmd); err != nil {
+		return errs.InternalServer
+	}
+	log.Println(cmd)
+	return errs.No
+}
 
 func (d *DefaultModel) WordCount(jobName, inputPath, outputPath string) int32 {
 	//开启mapreduce
@@ -86,6 +124,7 @@ func (d *DefaultModel) JobList(Id string) ([]*pb.Jobs, int32) {
 		urlPrefix = url
 	}
 	resp, err := http.Get(urlPrefix)
+	log.Println(urlPrefix)
 	if err != nil {
 		log.Println("获取作业列表失败：", err)
 		return nil, errs.InternalServer
@@ -93,7 +132,12 @@ func (d *DefaultModel) JobList(Id string) ([]*pb.Jobs, int32) {
 	defer resp.Body.Close()
 	// 解析JSON响应
 	var yarnResponse model.YarnApplications
-	json.NewDecoder(resp.Body).Decode(&yarnResponse)
+	err = json.NewDecoder(resp.Body).Decode(&yarnResponse)
+	if err != nil {
+		log.Println(err)
+		return nil, errs.InternalServer
+	}
+	log.Println(yarnResponse)
 	var jobs []*pb.Jobs
 	for _, app := range yarnResponse.Apps.App {
 		job := &pb.Jobs{
@@ -101,7 +145,7 @@ func (d *DefaultModel) JobList(Id string) ([]*pb.Jobs, int32) {
 			Name:         app.Name,
 			Status:       app.State,
 			FinalStatus:  app.FinalStatus,
-			Progress:     app.Progress,
+			Progress:     int32(app.Progress),
 			TrackingUrl:  app.TrackingUrl,
 			StartedTime:  time.TimTransfer(app.StartedTime),
 			LaunchTime:   time.TimTransfer(app.LaunchTime),
