@@ -83,6 +83,7 @@
 
 - 高容错性：数据自动保存多个副本。它通过增加副本的形式，提高容错性；某一个副本丢失以后，它可以自动恢复。
 - 用途：基于此实现了上传文件、下载文件、删除文件、数据聚合接口
+- 给出文件系统的路径和结构：https://z55s3unkae.feishu.cn/mindnotes/RHiLbtgfxm1aIUnT9bAcEbZinhc?from=from_copylink
 
 ### Hadoop Streaming
 
