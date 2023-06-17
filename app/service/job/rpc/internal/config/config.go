@@ -14,4 +14,9 @@ type Config struct {
 		Addr string
 		User string
 	}
+	RedisConf struct {
+		Addr     string
+		Password string
+		DB       int
+	}
 }

@@ -1,81 +1,86 @@
 syntax = "v1"
 
+//上传文件
 type (
-	UploadReq {
-		Level int32 `form:"level"`
-		Year  int32 `form:"year"`
-		Month int32 `form:"month"`
-		Set   int32 `form:"set"`
-	}
+    UploadReq {
+        Level int32 `form:"level"`//试卷等级
+        Year int32 `form:"year"`  //年份
+        Month int32 `form:"month"`//月份
+        Set int32 `form:"set"`    //第几套
+    }
 
-	UploadResp {
-		Status int32  `json:"status"`
-		Msg    string `json:"msg"`
-	}
+    UploadResp {
+        Status int32 `json:"status"`
+        Msg string `json:"msg"`
+    }
 )
 
+//下载文件
 type (
-	DownloadReq {
-		Type  int32 `form:"type"`
-		Id    int64 `form:"id"`
-		Level int32 `form:"level"`
-		Year  int32 `form:"year"`
-		Month int32 `form:"month"`
-		Set   int32 `form:"set"`
-	}
+    DownloadReq {
+        Type int32 `form:"type"`  //可以当作没有，做保留
+        Id int64 `form:"id"`      //文件id
+        Level int32 `form:"level"`//试卷等级
+        Year int32 `form:"year"`  //年份
+        Month int32 `form:"month"`//月份
+        Set int32 `form:"set"`    //第几套
+    }
 
-	DownloadResp {
-		Status int32  `json:"status"`
-		Msg    string `json:"msg"`
-	}
-)
-type (
-	GetFileListReq {
-		Level int32 `form:"level,optional"`
-		Year  int32 `form:"year,optional"`
-		Month int32 `form:"month,optional"`
-		Set   int32 `form:"set,optional"`
-	}
-
-	GetFileListResp {
-		Status int32       `json:"status"`
-		Msg    string      `json:"msg"`
-		List   interface{} `json:"list,omitempty"`
-	}
+    DownloadResp {
+        Status int32 `json:"status"`
+        Msg string `json:"msg"`
+    }
 )
 
+//获取文件列表
 type (
-	RemoveFileReq {
-		Id int64 `form:"id"`
-	}
+    GetFileListReq {
+        Level int32 `form:"level,optional"`//试卷等级
+        Year int32 `form:"year,optional"`  //年份
+        Month int32 `form:"month,optional"`//月份
+        Set int32 `form:"set,optional"`    //第几套
+    }
 
-	RemoveFileResp {
-		Status int32  `json:"status"`
-		Msg    string `json:"msg"`
-	}
+    GetFileListResp {
+        Status int32 `json:"status"`
+        Msg string `json:"msg"`
+        List interface{} `json:"list,omitempty"`//文件列表
+    }
+)
+
+//删除文件
+type (
+    RemoveFileReq {
+        Id int64 `form:"id"`//文件id
+    }
+
+    RemoveFileResp {
+        Status int32 `json:"status"`
+        Msg string `json:"msg"`
+    }
 )
 
 @server(
-	middleware : CORSMIDDLEWARE,JWTMIDDLEWARE
+    middleware : CORSMIDDLEWARE,JWTMIDDLEWARE
 )
-service file{
-	@doc "获取文件信息"
-	@handler GetFileList
-	post /file/list (GetFileListReq) returns (GetFileListResp)
-	@doc "下载文件"
-	@handler Download
-	post /file/download (DownloadReq) returns (DownloadResp)
+service file {
+    @doc "获取文件信息"
+    @handler GetFileList
+    post /file/list (GetFileListReq) returns (GetFileListResp)
+    @doc "下载文件"
+    @handler Download
+    post /file/download (DownloadReq) returns (DownloadResp)
 }
 
 @server(
-	middleware : CORSMIDDLEWARE,JWTMIDDLEWARE,AuthMIDDLEWARE
+    middleware : CORSMIDDLEWARE,JWTMIDDLEWARE,AuthMIDDLEWARE
 )
 
 service file {
-	@doc "上传文件"
-	@handler Upload
-	post /file/upload (UploadReq) returns (UploadResp)
-	@doc "删除文件"
-	@handler DeleteFile
-	delete /file/delete (RemoveFileReq)returns(RemoveFileResp)
+    @doc "上传文件"
+    @handler Upload
+    post /file/upload (UploadReq) returns (UploadResp)
+    @doc "删除文件"
+    @handler DeleteFile
+    delete /file/delete (RemoveFileReq) returns (RemoveFileResp)
 }

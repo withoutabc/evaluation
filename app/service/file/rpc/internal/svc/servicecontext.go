@@ -2,6 +2,7 @@ package svc
 
 import (
 	"rpc/app/common/config/database/mysql"
+	"rpc/app/common/config/database/redis"
 	"rpc/app/service/file/rpc/internal/config"
 	"rpc/app/service/file/rpc/internal/model/file"
 )
@@ -17,7 +18,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		Config: c,
 		FileModel: file.NewModel(
 			mysql.InitDB(c.Mysql.DataSource),
-			nil,
+			redis.InitRedis(c.RedisConf.Addr, c.RedisConf.Password, c.RedisConf.DB),
 		),
 	}
 }

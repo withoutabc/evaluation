@@ -8,8 +8,7 @@ import (
 	"time"
 )
 
-func InitRedis(host, port, password string, db int) *redis.Client {
-	addr := fmt.Sprintf("%s:%s", host, port)
+func InitRedis(addr, password string, db int) *redis.Client {
 	rdb := redis.NewClient(&redis.Options{
 		//连接信息
 		//Network:  "tcp",            //网络类型，tcp or unix，默认tcp

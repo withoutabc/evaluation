@@ -1,30 +1,32 @@
 syntax = "v1"
 
+//提交计数任务
 type (
 	CountJobReq {
-		Level int32 `form:"level"`
-		Year  int32 `form:"year"`
-		Month int32 `form:"month"`
-		Set   int32 `form:"set"`
+		Level int32 `form:"level"`//4/6
+		Year  int32 `form:"year"`//年份
+		Month int32 `form:"month"`//月份
+		Set   int32 `form:"set"`//第几套
 	}
 
 	CountJobResp {
 		Status  int32  `json:"status"`
 		Msg     string `json:"msg"`
-		JobName string `json:"job_name"`
+		JobName string `json:"job_name"`//作业名称
 	}
 )
 
+//聚合作业数据
 type (
 	JoinDataReq {
 		Type   int32 `form:"type,optional"` //1-count数据聚合  2-collect数据聚合
-		Year   int32 `form:"year,optional"`
-		Month  int32 `form:"month,optional"`
-		Set    int32 `form:"set,optional"`
-		Level  int32 `form:"level,optional"`
-		Begin  int32 `form:"begin,optional"`
-		End    int32 `form:"end,optional"`
-		Except int32 `form:"except,optional"`
+		Year   int32 `form:"year,optional"`//1 年份
+		Month  int32 `form:"month,optional"`//1 月份
+		Set    int32 `form:"set,optional"`//1 第几套
+		Level  int32 `form:"level,optional"`//1 2 等级
+		Begin  int32 `form:"begin,optional"`//2 开始年份
+		End    int32 `form:"end,optional"`//2 结束年份
+		Except int32 `form:"except,optional"`//2 过滤的词汇类别，如：1对应3500
 	}
 	JoinDataResp {
 		Status int32  `json:"status"`
@@ -32,25 +34,27 @@ type (
 	}
 )
 
+//查看作业列表
 type (
 	ViewJobsReq {
-		Id string `path:"id"`
+		Id string `path:"id"`//0表示查看全部 否则为查询某个固定的
 	}
 
 	ViewJobsResp {
 		Status  int32       `json:"status"`
 		Msg     string      `json:"msg"`
-		JobList interface{} `json:"jobList"`
+		JobList interface{} `json:"jobList"`//作业列表
 	}
 )
 
+//查看历年单词出现次数（可过滤）
 type (
 	ViewWordReq {
-		Level  int32 `form:"level"`
-		Begin  int32 `form:"begin"`
-		End    int32 `form:"end"`
-		Count  int32 `form:"count"`
-		Except int32 `form:"except"`
+		Level  int32 `form:"level"`//4/6
+		Begin  int32 `form:"begin"`//开始年份
+		End    int32 `form:"end"`//结束年份
+		Count  int32 `form:"count"`//显示前多少个
+		Except int32 `form:"except"`//过滤的词汇类别，如：1对应3500
 	}
 	ViewWordResp {
 		Status int32       `json:"status"`
@@ -59,17 +63,18 @@ type (
 	}
 )
 
+//提交统计作业
 type (
 	CollectJobReq {
-		Begin  int32 `form:"begin"`
-		End    int32 `form:"end"`
-		Level  int32 `form:"level"`
-		Except int32 `form:"except"`
+		Begin  int32 `form:"begin"`//开始年份
+		End    int32 `form:"end"`//结束年份
+		Level  int32 `form:"level"`//4/6
+		Except int32 `form:"except"`//过滤的词汇类别，如：1对应3500
 	}
 	CollectJobResp {
 		Status  int32  `json:"status"`
 		Msg     string `json:"msg"`
-		JobName string `json:"job_name"`
+		JobName string `json:"job_name"`//作业名称
 	}
 )
 

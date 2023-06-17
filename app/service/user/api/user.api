@@ -1,9 +1,10 @@
 syntax = "v1"
 
+//注册
 type (
 	RegisterReq {
-		Username string `form:"username"`
-		Password string `form:"password"`
+		Username string `form:"username"`//用户名
+		Password string `form:"password"`//密码
 	}
 
 	RegisterResp {
@@ -12,18 +13,19 @@ type (
 	}
 )
 
+//登录
 type (
 	LoginReq {
-		Username string `form:"username"`
-		Password string `form:"password"`
+		Username string `form:"username"`//用户名
+		Password string `form:"password"`//密码
 	}
 
 	LoginInfo {
-		ID           int64  `json:"id,omitempty"`
-		Role         string `json:"role,omitempty"`
-		LoginTime    string `json:"login_time,omitempty"`
-		AccessToken  string `json:"access_token,omitempty"`
-		RefreshToken string `json:"refresh_token,omitempty"`
+		ID           int64  `json:"id,omitempty"`//用户id
+		Role         string `json:"role,omitempty"`//角色
+		LoginTime    string `json:"login_time,omitempty"`//登录时间
+		AccessToken  string `json:"access_token,omitempty"`//登录token
+		RefreshToken string `json:"refresh_token,omitempty"`//刷新token
 	}
 
 	LoginResp {
@@ -45,16 +47,17 @@ service user {
 	post /user/login (LoginReq) returns (LoginResp)
 }
 
+//刷新token
 type (
 	RefreshReq {
-		RefreshToken string `form:"refresh_token"`
+		RefreshToken string `form:"refresh_token"`//刷新token
 	}
 
 	RefreshResp {
 		Status       int32  `json:"status"`
 		Msg          string `json:"msg"`
-		AccessToken  string `json:"access_token,omitempty"`
-		RefreshToken string `json:"refresh_token,omitempty"`
+		AccessToken  string `json:"access_token,omitempty"`//登录token
+		RefreshToken string `json:"refresh_token,omitempty"`//刷新token
 	}
 )
 

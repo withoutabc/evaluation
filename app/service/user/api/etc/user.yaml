@@ -14,7 +14,6 @@ Telemetry:
   Sampler: 1.0
   Batcher: jaeger
 
-
 Log:
   ServiceName: user
   Mode: file

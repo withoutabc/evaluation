@@ -13,11 +13,12 @@ Telemetry:
   Endpoint: http://jaeger:14268/api/traces
   Sampler: 1.0
   Batcher: jaeger
-#RedisConf:
-#   Host: 127.0.0.1
-#   Port: 6379
-#   Password: ""
-#   DB: 0
+
+RedisConf:
+  Addr: 127.0.0.1:6379
+  Password: ""
+  DB: 0
+
 Log:
   ServiceName: user
   Mode: file

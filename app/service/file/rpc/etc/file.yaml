@@ -5,6 +5,10 @@ Etcd:
   - 127.0.0.1:2379
   Key: file.rpc
 
+RedisConf:
+  Addr: 127.0.0.1:6379
+  Password: ""
+  DB: 0
 
 Mysql:
   DataSource: "root:224488@tcp(127.0.0.1:3306)/evaluation?charset=utf8mb4&loc=Local&parseTime=true"
