@@ -2,7 +2,7 @@ Name: job.rpc
 ListenOn: 0.0.0.0:8099
 Etcd:
   Hosts:
-  - 127.0.0.1:2380
+  - 127.0.0.1:2379
   Key: job.rpc
 
 Ssh:

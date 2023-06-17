@@ -1,0 +1,7 @@
+/app/service/job/api/etc/
+/app/service/user/api/etc/
+/app/service/user/rpc/etc/
+/app/service/file/api/etc/
+/app/service/file/rpc/etc/
+/app/service/job/rpc/etc/
+/app/common/mapreduce/collect/mapper/collectmapper

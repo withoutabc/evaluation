@@ -11,22 +11,22 @@ import (
 )
 
 type ServiceContext struct {
-	Config  config.Config
-	FileRpc file.FileZrpcClient
-
+	Config         config.Config
+	FileRpc        file.FileZrpcClient
 	HdfsCli        *hdfs.Client
 	CORSMIDDLEWARE rest.Middleware
 	JWTMIDDLEWARE  rest.Middleware
+	AuthMIDDLEWARE rest.Middleware
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	c.MaxBytes = 104857600
 	return &ServiceContext{
-		Config:  c,
-		FileRpc: file.NewFileZrpcClient(zrpc.MustNewClient(c.FileRpc)),
-
+		Config:         c,
+		FileRpc:        file.NewFileZrpcClient(zrpc.MustNewClient(c.FileRpc)),
 		HdfsCli:        hdfsinit.InitHdfs(c.Hdfs.Addr, c.Hdfs.User),
 		CORSMIDDLEWARE: middleware.NewCORSMIDDLEWAREMiddleware().Handle,
 		JWTMIDDLEWARE:  middleware.NewJWTMIDDLEWAREMiddleware().Handle,
+		AuthMIDDLEWARE: middleware.NewAuthMIDDLEWAREMiddleware().Handle,
 	}
 }

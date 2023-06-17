@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	Job_CountJob_FullMethodName   = "/file.job/CountJob"
 	Job_JoinData_FullMethodName   = "/file.job/JoinData"
+	Job_JoinData2_FullMethodName  = "/file.job/JoinData2"
 	Job_ViewJobs_FullMethodName   = "/file.job/ViewJobs"
 	Job_CollectJob_FullMethodName = "/file.job/CollectJob"
 	Job_ViewWord_FullMethodName   = "/file.job/ViewWord"
@@ -32,6 +33,7 @@ const (
 type JobClient interface {
 	CountJob(ctx context.Context, in *CountJobReq, opts ...grpc.CallOption) (*CountJobResp, error)
 	JoinData(ctx context.Context, in *JoinDataReq, opts ...grpc.CallOption) (*JoinDataResp, error)
+	JoinData2(ctx context.Context, in *JoinDataReq2, opts ...grpc.CallOption) (*JoinDataResp2, error)
 	ViewJobs(ctx context.Context, in *ViewJobsReq, opts ...grpc.CallOption) (*ViewJobsResp, error)
 	CollectJob(ctx context.Context, in *CollectJobReq, opts ...grpc.CallOption) (*CollectJobResp, error)
 	ViewWord(ctx context.Context, in *ViewWordReq, opts ...grpc.CallOption) (*ViewWordResp, error)
@@ -57,6 +59,15 @@ func (c *jobClient) CountJob(ctx context.Context, in *CountJobReq, opts ...grpc.
 func (c *jobClient) JoinData(ctx context.Context, in *JoinDataReq, opts ...grpc.CallOption) (*JoinDataResp, error) {
 	out := new(JoinDataResp)
 	err := c.cc.Invoke(ctx, Job_JoinData_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *jobClient) JoinData2(ctx context.Context, in *JoinDataReq2, opts ...grpc.CallOption) (*JoinDataResp2, error) {
+	out := new(JoinDataResp2)
+	err := c.cc.Invoke(ctx, Job_JoinData2_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -96,6 +107,7 @@ func (c *jobClient) ViewWord(ctx context.Context, in *ViewWordReq, opts ...grpc.
 type JobServer interface {
 	CountJob(context.Context, *CountJobReq) (*CountJobResp, error)
 	JoinData(context.Context, *JoinDataReq) (*JoinDataResp, error)
+	JoinData2(context.Context, *JoinDataReq2) (*JoinDataResp2, error)
 	ViewJobs(context.Context, *ViewJobsReq) (*ViewJobsResp, error)
 	CollectJob(context.Context, *CollectJobReq) (*CollectJobResp, error)
 	ViewWord(context.Context, *ViewWordReq) (*ViewWordResp, error)
@@ -111,6 +123,9 @@ func (UnimplementedJobServer) CountJob(context.Context, *CountJobReq) (*CountJob
 }
 func (UnimplementedJobServer) JoinData(context.Context, *JoinDataReq) (*JoinDataResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method JoinData not implemented")
+}
+func (UnimplementedJobServer) JoinData2(context.Context, *JoinDataReq2) (*JoinDataResp2, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method JoinData2 not implemented")
 }
 func (UnimplementedJobServer) ViewJobs(context.Context, *ViewJobsReq) (*ViewJobsResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ViewJobs not implemented")
@@ -166,6 +181,24 @@ func _Job_JoinData_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(JobServer).JoinData(ctx, req.(*JoinDataReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Job_JoinData2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(JoinDataReq2)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(JobServer).JoinData2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Job_JoinData2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(JobServer).JoinData2(ctx, req.(*JoinDataReq2))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -238,6 +271,10 @@ var Job_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "JoinData",
 			Handler:    _Job_JoinData_Handler,
+		},
+		{
+			MethodName: "JoinData2",
+			Handler:    _Job_JoinData2_Handler,
 		},
 		{
 			MethodName: "ViewJobs",

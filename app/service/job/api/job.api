@@ -17,11 +17,14 @@ type (
 
 type (
 	JoinDataReq {
-		Type  int32 `form:"type"` //1-count数据聚合  2-
-		Level int32 `form:"level"`
-		Year  int32 `form:"year"`
-		Month int32 `form:"month"`
-		Set   int32 `form:"set"`
+		Type   int32 `form:"type,optional"` //1-count数据聚合  2-collect数据聚合
+		Year   int32 `form:"year,optional"`
+		Month  int32 `form:"month,optional"`
+		Set    int32 `form:"set,optional"`
+		Level  int32 `form:"level,optional"`
+		Begin  int32 `form:"begin,optional"`
+		End    int32 `form:"end,optional"`
+		Except int32 `form:"except,optional"`
 	}
 	JoinDataResp {
 		Status int32  `json:"status"`
@@ -73,7 +76,15 @@ type (
 @server(
 	middleware : CORSMIDDLEWARE,JWTMIDDLEWARE
 )
+service job{
+	@doc "统计历年单词"
+	@handler CollectJob
+	post /collect/job (CollectJobReq) returns (CollectJobResp)
+}
 
+@server(
+	middleware : CORSMIDDLEWARE,JWTMIDDLEWARE,AuthMIDDLEWARE
+)
 service job {
 	@doc "提交计数任务"
 	@handler CountJob
@@ -84,9 +95,6 @@ service job {
 	@doc "查看作业情况"
 	@handler ViewJob
 	get /view/job/:id (ViewJobsReq) returns (ViewJobsResp)
-	@doc "统计历年单词"
-	@handler CollectJob
-	post /collect/job (CollectJobReq) returns (CollectJobResp)
 	@doc "查看高频单词"
 	@handler ViewWord
 	post /view/words (ViewWordReq) returns (ViewWordResp)

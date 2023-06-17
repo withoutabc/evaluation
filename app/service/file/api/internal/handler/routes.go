@@ -16,18 +16,26 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/file/upload",
-					Handler: UploadHandler(serverCtx),
+					Path:    "/file/list",
+					Handler: GetFileListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/file/download",
 					Handler: DownloadHandler(serverCtx),
 				},
+			}...,
+		),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CORSMIDDLEWARE, serverCtx.JWTMIDDLEWARE, serverCtx.AuthMIDDLEWARE},
+			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/file/list",
-					Handler: GetFileListHandler(serverCtx),
+					Path:    "/file/upload",
+					Handler: UploadHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodDelete,

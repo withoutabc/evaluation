@@ -30,6 +30,16 @@ message JoinDataResp{
   string status_msg = 2;
 }
 
+message JoinDataReq2{
+  int32 begin=1;
+  int32 end=2;
+  int32 level=3;
+  int32 except=4;
+}
+message JoinDataResp2{
+  int32 status_code = 1;
+  string status_msg = 2;
+}
 message ViewJobsReq{
   string id = 1;
 }
@@ -90,6 +100,7 @@ message ViewWordResp{
 service job {
   rpc CountJob(CountJobReq)returns(CountJobResp);
   rpc JoinData(JoinDataReq)returns(JoinDataResp);
+  rpc JoinData2(JoinDataReq2)returns(JoinDataResp2);
   rpc ViewJobs(ViewJobsReq)returns(ViewJobsResp);
   rpc CollectJob(CollectJobReq)returns(CollectJobResp);
   rpc ViewWord(ViewWordReq)returns(ViewWordResp);

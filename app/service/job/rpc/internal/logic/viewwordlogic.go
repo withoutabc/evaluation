@@ -16,6 +16,10 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+const (
+	outputPathResultPrefix = "/evaluation/collect/result/"
+)
+
 type ViewWordLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -31,9 +35,20 @@ func NewViewWordLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ViewWord
 }
 
 func (l *ViewWordLogic) ViewWord(in *pb.ViewWordReq) (*pb.ViewWordResp, error) {
-	jobName := fmt.Sprintf("%s-%s-%s/%s", strconv.Itoa(int(in.Begin)), strconv.Itoa(int(in.End)), maps.LevelMap[in.Level], maps.WordlistMap[in.Except])
+	//创建文件夹
+	err := l.svcCtx.HdfsCli.MkdirAll("/evaluation/collect/result", 0755)
+	if err != nil {
+		return &pb.ViewWordResp{
+			StatusCode: errs.FileSystemInternal,
+			StatusMsg:  errs.ErrorsMap[errs.FileSystemInternal].Error(),
+			Words:      nil,
+		}, nil
+	}
+	//拼名字
+	jobName := fmt.Sprintf("%s-%s-%s*%s", strconv.Itoa(int(in.Begin)), strconv.Itoa(int(in.End)), maps.LevelMap[in.Level], maps.WordlistMap[in.Except])
+	fileName := fmt.Sprintf("%s.txt", jobName)
 	//检查是否有这个文件
-	fileInfoList, err := l.svcCtx.HdfsCli.ReadDir(outputPathPrefix)
+	fileInfoList, err := l.svcCtx.HdfsCli.ReadDir(outputPathResultPrefix)
 	if err != nil {
 		return &pb.ViewWordResp{
 			StatusCode: errs.FileSystemInternal,
@@ -43,7 +58,7 @@ func (l *ViewWordLogic) ViewWord(in *pb.ViewWordReq) (*pb.ViewWordResp, error) {
 	}
 	var count = 0
 	for _, fileInfo := range fileInfoList {
-		if fileInfo.Name() == jobName {
+		if fileInfo.Name() == jobName+".txt" {
 			count++
 		}
 	}
@@ -55,7 +70,8 @@ func (l *ViewWordLogic) ViewWord(in *pb.ViewWordReq) (*pb.ViewWordResp, error) {
 			Words:      nil,
 		}, nil
 	}
-	file, err := l.svcCtx.HdfsCli.Open(outputPathPrefix + jobName)
+	file, err := l.svcCtx.HdfsCli.Open(outputPathResultPrefix + fileName)
+	log.Println(outputPathResultPrefix + fileName)
 	if err != nil {
 		return &pb.ViewWordResp{
 			StatusCode: errs.FileSystemInternal,

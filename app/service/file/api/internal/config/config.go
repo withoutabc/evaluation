@@ -11,5 +11,6 @@ type Config struct {
 		Addr string
 		User string
 	}
+
 	FileRpc zrpc.RpcClientConf
 }

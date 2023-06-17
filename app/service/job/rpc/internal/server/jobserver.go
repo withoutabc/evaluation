@@ -32,6 +32,11 @@ func (s *JobServer) JoinData(ctx context.Context, in *pb.JoinDataReq) (*pb.JoinD
 	return l.JoinData(in)
 }
 
+func (s *JobServer) JoinData2(ctx context.Context, in *pb.JoinDataReq2) (*pb.JoinDataResp2, error) {
+	l := logic.NewJoinData2Logic(ctx, s.svcCtx)
+	return l.JoinData2(in)
+}
+
 func (s *JobServer) ViewJobs(ctx context.Context, in *pb.ViewJobsReq) (*pb.ViewJobsResp, error) {
 	l := logic.NewViewJobsLogic(ctx, s.svcCtx)
 	return l.ViewJobs(in)

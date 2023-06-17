@@ -16,6 +16,19 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
+					Path:    "/collect/job",
+					Handler: CollectJobHandler(serverCtx),
+				},
+			}...,
+		),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CORSMIDDLEWARE, serverCtx.JWTMIDDLEWARE, serverCtx.AuthMIDDLEWARE},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
 					Path:    "/submit/job",
 					Handler: CountJobHandler(serverCtx),
 				},
@@ -28,11 +41,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Method:  http.MethodGet,
 					Path:    "/view/job/:id",
 					Handler: ViewJobHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/collect/job",
-					Handler: CollectJobHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,

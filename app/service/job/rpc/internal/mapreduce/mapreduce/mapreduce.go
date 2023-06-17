@@ -9,7 +9,6 @@ import (
 	"rpc/app/common/consts/errs"
 	"rpc/app/service/job/rpc/internal/mapreduce/model"
 	"rpc/app/service/job/rpc/pb"
-	"rpc/utils/time"
 	"strconv"
 )
 
@@ -38,10 +37,10 @@ func (d *DefaultModel) Collect(jobName, outputPath string, inputPaths []string, 
 		if i == 0 {
 			input = fmt.Sprintf("%s", inputPaths[i])
 		} else {
-			input = fmt.Sprintf(",%s", inputPaths[i])
+			input = fmt.Sprintf("%s,%s", input, inputPaths[i])
 		}
 	}
-	input = fmt.Sprintf(",%s", exceptPath)
+	input = fmt.Sprintf("%s,%s", input, exceptPath+".txt")
 	log.Println(input)
 	// input path output path
 	cmd := "hadoop jar " +
@@ -147,9 +146,9 @@ func (d *DefaultModel) JobList(Id string) ([]*pb.Jobs, int32) {
 			FinalStatus:  app.FinalStatus,
 			Progress:     int32(app.Progress),
 			TrackingUrl:  app.TrackingUrl,
-			StartedTime:  time.TimTransfer(app.StartedTime),
-			LaunchTime:   time.TimTransfer(app.LaunchTime),
-			FinishedTime: time.TimTransfer(app.FinishedTime),
+			StartedTime:  strconv.FormatInt(app.StartedTime, 10),
+			LaunchTime:   strconv.FormatInt(app.LaunchTime, 10),
+			FinishedTime: strconv.FormatInt(app.FinishedTime, 10),
 			ElapsedTime:  strconv.Itoa(app.ElapsedTime),
 		}
 		jobs = append(jobs, job)

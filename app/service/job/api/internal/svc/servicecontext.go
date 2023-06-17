@@ -9,11 +9,11 @@ import (
 )
 
 type ServiceContext struct {
-	Config config.Config
-	JobRpc job.Job
-
+	Config         config.Config
+	JobRpc         job.Job
 	CORSMIDDLEWARE rest.Middleware
 	JWTMIDDLEWARE  rest.Middleware
+	AuthMIDDLEWARE rest.Middleware
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -22,5 +22,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		JobRpc:         job.NewJob(zrpc.MustNewClient(c.JobRpc)),
 		CORSMIDDLEWARE: middleware.NewCORSMIDDLEWAREMiddleware().Handle,
 		JWTMIDDLEWARE:  middleware.NewJWTMIDDLEWAREMiddleware().Handle,
+		AuthMIDDLEWARE: middleware.NewAuthMIDDLEWAREMiddleware().Handle,
 	}
 }

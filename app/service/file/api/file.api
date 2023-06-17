@@ -58,17 +58,23 @@ type (
 @server(
 	middleware : CORSMIDDLEWARE,JWTMIDDLEWARE
 )
+service file{
+	@doc "获取文件信息"
+	@handler GetFileList
+	post /file/list (GetFileListReq) returns (GetFileListResp)
+	@doc "下载文件"
+	@handler Download
+	post /file/download (DownloadReq) returns (DownloadResp)
+}
+
+@server(
+	middleware : CORSMIDDLEWARE,JWTMIDDLEWARE,AuthMIDDLEWARE
+)
 
 service file {
 	@doc "上传文件"
 	@handler Upload
 	post /file/upload (UploadReq) returns (UploadResp)
-	@doc "下载文件"
-	@handler Download
-	post /file/download (DownloadReq) returns (DownloadResp)
-	@doc "获取文件信息"
-	@handler GetFileList
-	post /file/list (GetFileListReq) returns (GetFileListResp)
 	@doc "删除文件"
 	@handler DeleteFile
 	delete /file/delete (RemoveFileReq)returns(RemoveFileResp)

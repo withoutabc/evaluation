@@ -23,8 +23,8 @@ func (a CountDesc) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }        //交�
 func (a CountDesc) Less(i, j int) bool { return a[i].Count > a[j].Count } //比较元素大小
 
 func main() {
-	wordlist := make([]string, 0)     //要删除的单词列表
-	wordCount := make(map[string]int) //定义一个map，用于记录单词出现的次数
+	wordlist := make([]string, 0) //要删除的单词列表
+	wordCount := make(map[string]int)
 	scanner := bufio.NewScanner(os.Stdin)
 	//循环读取标准输入的每一行数据
 	for scanner.Scan() {

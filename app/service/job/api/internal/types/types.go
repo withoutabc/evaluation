@@ -15,11 +15,14 @@ type CountJobResp struct {
 }
 
 type JoinDataReq struct {
-	Type  int32 `form:"type"` //1-count数据聚合  2-
-	Level int32 `form:"level"`
-	Year  int32 `form:"year"`
-	Month int32 `form:"month"`
-	Set   int32 `form:"set"`
+	Type   int32 `form:"type,optional"` //1-count数据聚合  2-collect数据聚合
+	Year   int32 `form:"year,optional"`
+	Month  int32 `form:"month,optional"`
+	Set    int32 `form:"set,optional"`
+	Level  int32 `form:"level,optional"`
+	Begin  int32 `form:"begin,optional"`
+	End    int32 `form:"end,optional"`
+	Except int32 `form:"except,optional"`
 }
 
 type JoinDataResp struct {

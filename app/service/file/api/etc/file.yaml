@@ -6,12 +6,13 @@ MaxBytes: 1073741824
 FileRpc:
   Etcd:
     Hosts:
-      - 127.0.0.1:2381
+      - 127.0.0.1:2379
     Key: file.rpc
 
 Hdfs:
   Addr: 192.168.10.102:8020
   User: root
+
 
 Telemetry:
   Name: file.rpc

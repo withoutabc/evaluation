@@ -27,6 +27,8 @@ const (
 	WrongLevel       //等级不存在
 	UnknownType
 	UnknownExcept
+
+	WrongData
 )
 
 var (
@@ -55,6 +57,8 @@ var (
 	WrongLevelErr       = errors.New("等级不存在")
 	UnknownTypeErr      = errors.New("不存在的type")
 	UnknownExceptErr    = errors.New("单词列表不存在")
+
+	WrongDataErr = errors.New("错误的参数")
 )
 
 var ErrorsMap = map[int32]error{
@@ -82,4 +86,6 @@ var ErrorsMap = map[int32]error{
 	WrongLevel:       WrongLevelErr,
 	UnknownType:      UnknownTypeErr,
 	UnknownExcept:    UnknownExceptErr,
+
+	WrongData: WrongDataErr,
 }

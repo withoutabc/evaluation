@@ -19,6 +19,7 @@ const (
 	TestWordCountMapperFile  = " -file /opt/exe/mapper "
 	TestWordCountReducerFile = " -file /opt/exe/reducer "
 
-	Reduce  = " -D mapreduce.job.reduces=2 "
+	Reduce  = " -D mapreduce.job.reduces=2 " //结果为2个文件
+	Reduce1 = " -D mapreduce.job.reduces=1 "
 	JobName = " -D mapreduce.job.name="
 )
