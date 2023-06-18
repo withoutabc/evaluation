@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"rpc/app/common/consts/errs"
 	"rpc/app/service/user/rpc/internal/svc"
 	"rpc/app/service/user/rpc/pb"
 
@@ -27,6 +28,7 @@ func (l *RefreshLogic) Refresh(in *pb.RefreshReq) (*pb.RefreshResp, error) {
 
 	return &pb.RefreshResp{
 		StatusCode:   code,
+		StatusMsg:    errs.ErrorsMap[code].Error(),
 		AccessToken:  newAToken,
 		RefreshToken: newRToken,
 	}, nil

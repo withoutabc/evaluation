@@ -30,11 +30,17 @@
 
 #### 注册
 
+![register](.\images\register.png)
+
 #### 登录
+
+![login](.\images\login.png)
 
 #### 刷新token
 
 - 基于`jwt`的双token认证模式
+
+![refresh](.\images\refresh.png)
 
 ### 文件相关
 

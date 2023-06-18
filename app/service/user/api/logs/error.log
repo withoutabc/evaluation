@@ -839,3 +839,8 @@ username=11111&password=2222	duration=2.7ms	caller=handler/loghandler.go:162	tra
 2023-06-14T15:27:59.916+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
 2023-06-16T18:40:53.915+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
 2023-06-17T09:09:28.193+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
+2023-06-18T08:08:52.928+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
+2023-06-18T08:10:48.112+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
+2023-06-18T08:12:03.241+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
+2023-06-18T08:12:13.231+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
+2023-06-18T08:14:01.267+08:00	[31;1m error [0m	bad resolver state	caller=internal/discovbuilder.go:34
