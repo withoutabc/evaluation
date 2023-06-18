@@ -19,3 +19,4 @@
 2023-06-18T08:08:51.182+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
 2023-06-18T08:10:46.326+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
 2023-06-18T08:12:16.445+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
+2023-06-18T08:14:35.401+08:00	[31;1m error [0m	[otel] error: Post "http://jaeger:14268/api/traces": dial tcp: lookup jaeger: no such host	caller=trace/agent.go:135
